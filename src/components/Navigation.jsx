@@ -13,19 +13,19 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
       <div className=" mx-auto px-6 py-4 flex justify-around items-center">
         {/* Logo */}
         <div className="text-2xl font-bold min-w-fit z-10">
-          <span className="text-white font-poppins">Shashmitha</span>
+          <span className="text-white font-poppins font-medium">Shashmitha</span>
           <span className="text-orange-500">.</span>
         </div>
-        <div>
+
         {/* Desktop Navigation - Centered Pill Container */}
         <nav className="hidden lg:flex justify-center absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
           {/* Main Navigation Wrapper - The pill background */}
-          <div className="flex items-center space-x-2 p-2 rounded-full bg-gray-800/50 backdrop-blur-sm border border-gray-700/50">
+          <div className="flex items-center space-x-10  rounded-full bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 ">
             {['home', 'skills', 'experience', 'connect'].map((item) => (
               <a 
                 key={item}
                 href={`#${item}`} 
-                className={`px-4 py-2 rounded-full text-sm font-poppins font-medium transition-colors duration-200 tracking-wide
+                className={`px-10 py-2 rounded-full text-sm font-poppins font-medium transition-colors duration-200 tracking-wide
                   ${activeSection === item
                     ? 'bg-orange-600 text-white shadow-lg shadow-orange-500/20' // Active pill style
                     : 'text-gray-300 hover:text-white hover:bg-gray-700/30' // Inactive style
@@ -36,7 +36,7 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
             ))}
           </div>
         </nav>
-</div>
+
         {/* Download Resume Button - Aligned Right */}
         <div className="hidden lg:flex items-center gap-2 z-10">
           <button className="flex items-center gap-2 px-4 py-2 border border-gray-400 text-white rounded-full bg-gray-800/50 backdrop-blur-sm hover:bg-gray-700/50 transition-colors duration-200 text-sm font-poppins font-medium tracking-wide">
