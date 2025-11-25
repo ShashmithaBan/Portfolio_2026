@@ -14,19 +14,19 @@ export default function Hero() {
         {/* Left Content */}
         <div className="space-y-8">
           {/* Main Title */}
-          <div className="space-y-4">
-            <p className="text-orange-500 text-lg font-medium">Hey, I am <span className="text-white">Noah</span></p>
-            <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
+          <div className="space-y-6">
+            <p className="text-orange-500 text-lg font-poppins font-medium tracking-wide">Hey, I am <span className="text-white font-semibold">Noah</span></p>
+            <h1 className="text-6xl lg:text-7xl font-display font-bold leading-tight text-white">
               Web<br />developer
             </h1>
-            <p className="text-gray-300 text-lg max-w-md leading-relaxed">
+            <p className="text-gray-300 text-lg max-w-md leading-relaxed font-light">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit amet, sed do.
             </p>
           </div>
 
           {/* CTA Buttons */}
           <div className="flex gap-6 items-center pt-4">
-            <button className="px-8 py-3 bg-orange-500 hover:bg-orange-600 rounded-full font-semibold transition transform hover:scale-105">
+            <button className="px-8 py-3 bg-orange-500 hover:bg-orange-600 rounded-full font-poppins font-semibold transition transform hover:scale-105 tracking-wide">
               Hire me
             </button>
             <button className="p-3 border border-white/20 hover:border-orange-400 rounded-full transition transform hover:scale-105">
@@ -36,14 +36,14 @@ export default function Hero() {
 
           {/* Testimonial Card */}
           <div className="mt-12 p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl hover:border-orange-400/30 transition">
-            <p className="text-sm text-gray-300 leading-relaxed mb-4">
+            <p className="text-sm text-gray-300 leading-relaxed mb-4 font-light">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>
             <div className="flex items-center gap-4">
               <div className="w-10 h-10 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full"></div>
               <div>
-                <p className="font-semibold text-sm">Guest Ali Brohil</p>
-                <p className="text-xs text-gray-400">Product Manager</p>
+                <p className="font-poppins font-semibold text-sm text-white">Guest Ali Brohil</p>
+                <p className="text-xs text-gray-400 font-light">Product Manager</p>
               </div>
             </div>
           </div>
