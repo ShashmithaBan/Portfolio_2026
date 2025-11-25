@@ -1,8 +1,7 @@
 @import "tailwindcss";
 
 * {
-  margin: 0;
-  padding: 0;
+ 
   box-sizing: border-box;
 }
 
@@ -41,23 +40,7 @@ h2 {
   letter-spacing: -1px;
 }
 
-.logo {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 700;
-  letter-spacing: -0.5px;
-}
 
-nav a {
-  font-family: 'Inter', sans-serif;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-}
-
-button {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-  letter-spacing: 0.3px;
-}
 
 @keyframes float {
   0%, 100% {

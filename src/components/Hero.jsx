@@ -40,7 +40,7 @@ export default function Hero() {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>
             <div className="flex items-center gap-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full"></div>
+              <div className="w-10 h-10 bg-gradient-to-r from-orange-400 to-orange-600 rounded-full"></div>
               <div>
                 <p className="font-poppins font-semibold text-sm text-white">Guest Ali Brohil</p>
                 <p className="text-xs text-gray-400 font-light">Product Manager</p>
@@ -66,10 +66,10 @@ export default function Hero() {
           </div>
 
           {/* Character Placeholder */}
-          <div className="relative w-64 h-64 lg:w-80 lg:h-80 bg-gradient-to-br from-orange-400/20 to-orange-600/10 rounded-full blur-3xl"></div>
+          <div className="relative w-64 h-64 lg:w-80 lg:h-80 bg-gradient-to-r from-orange-400/20 to-orange-600/10 rounded-full blur-3xl"></div>
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center">
-              <div className="w-48 h-48 lg:w-64 lg:h-64 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full opacity-10 blur-2xl"></div>
+              <div className="w-48 h-48 lg:w-64 lg:h-64 bg-gradient-to-r from-orange-400 to-orange-600 rounded-full opacity-10 blur-2xl"></div>
               <p className="text-6xl mt-4">😊</p>
             </div>
           </div>
