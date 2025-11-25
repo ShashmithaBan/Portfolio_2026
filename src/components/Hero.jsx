@@ -65,13 +65,13 @@ export default function Hero() {
             💡
           </div>
 
-          {/* Character Placeholder */}
-          <div className="relative w-64 h-64 lg:w-80 lg:h-80 bg-linear-to-r from-orange-400/20 to-orange-600/10 rounded-full blur-3xl"></div>
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-center">
-              <div className="w-48 h-48 lg:w-64 lg:h-64 bg-linear-to-r from-orange-400 to-orange-600 rounded-full opacity-10 blur-2xl"></div>
-              <p className="text-6xl mt-4">😊</p>
-            </div>
+          {/* Character Image */}
+          <div className="relative w-64 h-64 lg:w-80 lg:h-80 flex items-center justify-center">
+            <img 
+              src="/character.png" 
+              alt="Noah - Web Developer" 
+              className="w-full h-full object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500"
+            />
           </div>
         </div>
       </div>
