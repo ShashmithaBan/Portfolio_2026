@@ -13,14 +13,14 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
       <div className=" mx-auto px-6 py-4 flex justify-around items-center">
         {/* Logo */}
         <div className="text-2xl font-bold min-w-fit z-10">
-          <span className="text-white font-poppins font-medium">Shashmitha</span>
+          <span className="text-white font-sans font-medium">Shashmitha</span>
           <span className="text-orange-500">.</span>
         </div>
 
         {/* Desktop Navigation - Centered Pill Container */}
         <nav className="hidden lg:flex justify-center absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
           {/* Main Navigation Wrapper - The pill background */}
-          <div className="flex items-center space-x-10  rounded-full bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 ">
+          <div className="flex items-center space-x-10 px-6 py-3 rounded-full bg-gray-800/50 backdrop-blur-sm border border-gray-700/50">
             {['home', 'skills', 'experience', 'connect'].map((item) => (
               <a 
                 key={item}
