@@ -20,18 +20,18 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
         {/* Desktop Navigation - Centered Pill Container */}
         <nav className="hidden lg:flex justify-center absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
           {/* Main Navigation Wrapper - The pill background */}
-          <div className="flex items-center space-x-10 px-6 py-3 rounded-full bg-gray-800/50 backdrop-blur-sm border border-gray-700/50">
+          <div className="flex items-center gap-3 px-6 py-3 rounded-full bg-gray-800/50 backdrop-blur-sm border border-gray-700/50">
             {['home', 'skills', 'experience', 'connect'].map((item) => (
               <a 
                 key={item}
                 href={`#${item}`} 
-                className={`px-10 py-2 rounded-full text-sm font-poppins font-medium transition-colors duration-200 tracking-wide
+                className={`px-6 py-2 rounded-full text-sm font-poppins font-medium transition-colors duration-200 tracking-wide whitespace-nowrap
                   ${activeSection === item
                     ? 'bg-orange-600 text-white shadow-lg shadow-orange-500/20' // Active pill style
                     : 'text-gray-300 hover:text-white hover:bg-gray-700/30' // Inactive style
                   }`}
               >
-                {item.charAt(0).toUpperCase() + item.slice(1)} {/* Capitalize for display */}
+                {item.charAt(0).toUpperCase() + item.slice(1)}
               </a>
             ))}
           </div>
