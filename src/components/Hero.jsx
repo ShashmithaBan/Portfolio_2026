@@ -10,9 +10,9 @@ export default function Hero() {
         <div className="absolute bottom-20 left-10 w-96 h-96 bg-orange-500/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
       </div>
 
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+      <div className="max-w-7xl mx-auto w-full relative z-10">
         {/* Left Content */}
-        <div className="space-y-8">
+        <div className="max-w-xl space-y-8">
           {/* Main Title */}
           <div className="space-y-6">
             <p className="text-orange-500 text-lg font-poppins font-medium tracking-wide">Hey, I am <span className="text-white font-semibold">Noah</span></p>
@@ -49,30 +49,28 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Right Side - 3D Character and Icons */}
-        <div className="relative h-full min-h-96 flex items-center justify-center lg:justify-end">
-          {/* Floating Icons */}
-          <div className="absolute top-20 left-10 lg:left-auto lg:right-1/3 w-16 h-16 bg-orange-400/20 backdrop-blur-md border border-orange-400/40 rounded-xl flex items-center justify-center text-2xl animate-bounce">
+        {/* Large Character - Bottom Right */}
+        <div className="absolute bottom-0 right-0 -mr-20 lg:-mr-40 pointer-events-none">
+          {/* Floating Icons - Around Character */}
+          <div className="absolute -top-32 left-12 w-16 h-16 bg-orange-400/20 backdrop-blur-md border border-orange-400/40 rounded-xl flex items-center justify-center text-2xl animate-bounce">
             🎨
           </div>
-          <div className="absolute top-40 right-20 lg:right-32 w-16 h-16 bg-blue-400/20 backdrop-blur-md border border-blue-400/40 rounded-xl flex items-center justify-center text-2xl animate-bounce" style={{ animationDelay: '0.2s' }}>
+          <div className="absolute -top-12 -right-32 w-16 h-16 bg-blue-400/20 backdrop-blur-md border border-blue-400/40 rounded-xl flex items-center justify-center text-2xl animate-bounce" style={{ animationDelay: '0.2s' }}>
             📱
           </div>
-          <div className="absolute bottom-32 left-1/4 w-16 h-16 bg-green-400/20 backdrop-blur-md border border-green-400/40 rounded-xl flex items-center justify-center text-2xl animate-bounce" style={{ animationDelay: '0.4s' }}>
+          <div className="absolute top-32 -left-24 w-16 h-16 bg-green-400/20 backdrop-blur-md border border-green-400/40 rounded-xl flex items-center justify-center text-2xl animate-bounce" style={{ animationDelay: '0.4s' }}>
             ⚙️
           </div>
-          <div className="absolute bottom-20 right-1/4 lg:right-1/3 w-16 h-16 bg-purple-400/20 backdrop-blur-md border border-purple-400/40 rounded-xl flex items-center justify-center text-2xl animate-bounce" style={{ animationDelay: '0.6s' }}>
+          <div className="absolute top-64 -right-16 w-16 h-16 bg-purple-400/20 backdrop-blur-md border border-purple-400/40 rounded-xl flex items-center justify-center text-2xl animate-bounce" style={{ animationDelay: '0.6s' }}>
             💡
           </div>
 
-          {/* Character Image */}
-          <div className="relative w-64 h-64 lg:w-80 lg:h-80 flex items-center justify-center">
-            <img 
-              src="/character.png" 
-              alt="Noah - Web Developer" 
-              className="w-full h-full object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500"
-            />
-          </div>
+          {/* Character Image - Much Larger */}
+          <img 
+            src="/character.png" 
+            alt="Noah - Web Developer" 
+            className="w-96 h-96 lg:w-screen lg:h-screen object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500"
+          />
         </div>
       </div>
 
