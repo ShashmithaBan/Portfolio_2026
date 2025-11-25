@@ -7,7 +7,7 @@ export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <div className="bg-gradient-to-br from-slate-900 via-orange-900 to-slate-900 min-h-screen text-white">
+    <div className="bg-linear-to-br from-slate-900 via-orange-900 to-slate-900 min-h-screen text-white">
       {/* Navigation */}
       <Navigation mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} />
 
