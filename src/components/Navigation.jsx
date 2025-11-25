@@ -5,14 +5,14 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
     const activeSection = 'home';
 
     return (
-        <header className="fixed top-0 left-0 right-0 z-50 ">
-            <div className="mx-auto px-4 md:px-6 py-4 flex justify-around items-center">
+        <header className="fixed top-0 left-0 right-0 z-50 bg-[#1A0C00]/40 backdrop-blur-md border-b border-white/10">
+            <div className="mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
                 {/* Logo */}
                 <div className="text-xl md:text-2xl font-bold min-w-fit z-10">
                     <span className="text-white font-sans font-medium">Shashmitha</span>
                     <span className="text-orange-500">.</span>
                 </div>
-<div className="flex items-center gap-4">
+
                 {/* Desktop Navigation - Centered Pill Container */}
                 <nav className="hidden lg:flex justify-center absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
                     {/* Main Navigation Wrapper - The pill background */}
@@ -36,13 +36,12 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
                 {/* Download Resume Button - Desktop Only */}
                 <div className="hidden lg:flex items-center gap-2 z-10">
                     <button className="flex items-center gap-2 px-4 py-2 border border-gray-600 text-white rounded-full backdrop-blur-sm hover:bg-orange-600 hover:font-bold hover:border-orange-600 hover:scale-110 transition-all duration-300 text-sm tracking-wide whitespace-nowrap transform">
-                        <svg className="w-4 h-4 transition-transform duration-300 group-hover:rotate-12" fill="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-4 h-4 transition-transform duration-300 hover:rotate-12" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" />
                         </svg>
-                        <span className='font-sans'>Download <br/> Resume</span>
+                        <span className='font-sans'>Download Resume</span>
                     </button>
                 </div>
-</div>
                 {/* Mobile Menu Button */}
                 <button
                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
