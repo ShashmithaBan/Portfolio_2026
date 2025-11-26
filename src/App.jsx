@@ -1,25 +1,37 @@
 import React, { useState } from 'react';
-import { Menu, X, Mail, Github, Linkedin, Instagram } from 'lucide-react';
-import Hero from './components/Hero';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import LoadScreen from './components/LoadScreen';
+import Home from './pages/Home';
+import About from './pages/About';
+import Skills from './pages/Skills';
+import Experience from './pages/Experience';
+import Connect from './pages/Connect';
 
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isLoadScreenVisible, setIsLoadScreenVisible] = useState(true);
+  const [loadScreenVisible, setLoadScreenVisible] = useState(true);
 
   return (
-    <div className="bg-linear-to-br from-slate-900 via-purple-950 to-slate-900 min-h-screen text-white">
-      {/* Load Screen - Shows on scroll */}
-      <LoadScreen onVisibilityChange={setIsLoadScreenVisible} />
+    <Router>
+      <div className="bg-linear-to-br from-slate-900 via-purple-950 to-slate-900 min-h-screen text-white">
+        {/* Load Screen - Shows on scroll */}
+        <LoadScreen onVisibilityChange={setLoadScreenVisible} />
 
-      {/* Navigation - Hidden while LoadScreen is visible */}
-      {!isLoadScreenVisible && (
-        <Navigation mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} />
-      )}
+        {/* Navigation - Hidden when LoadScreen is visible */}
+        {!loadScreenVisible && (
+          <Navigation mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} />
+        )}
 
-      {/* Hero Section */}
-      <Hero />
-    </div>
+        {/* Routes */}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/skills" element={<Skills />} />
+          <Route path="/experience" element={<Experience />} />
+          <Route path="/connect" element={<Connect />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }

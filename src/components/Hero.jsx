@@ -1,5 +1,6 @@
 import React from 'react';
-import { Mail, Github, Linkedin, Instagram } from 'lucide-react';
+import { Mail, Github, Linkedin, Instagram, ChevronDown } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import ExperienceSlider from './ExperienceSlider';
 import AnimatedTitle from './AnimatedTitle';
 
@@ -40,7 +41,7 @@ export default function Hero() {
         <div className="space-y-8">
           {/* Main Title */}
           <div className="space-y-2">
-            <p className="text-purple-700 text-lg font-sans font-medium tracking-wide">Hey, I am <span className="text-white font-semibold">Shashmitha Bandara</span></p>
+            <p className="text-purple-600 text-lg font-sans font-medium tracking-wide">Hey, I'm <span className="text-white font-semibold">Shashmitha Bandara</span></p>
             <AnimatedTitle />
             <p className="text-gray-300 text-md max-w-lg leading-relaxed font-poppins font-light">
              Passionate Software Engineering Undergraduate specializing in DevOps and Cloud (Kubernetes, Docker, AWS), recognized for outstanding leadership and scalable software solutions.
@@ -73,6 +74,14 @@ export default function Hero() {
 
           {/* Experience Slider */}
           <ExperienceSlider />
+
+          {/* Explore Button */}
+          <Link to="/skills" className="inline-block mt-8">
+            <button className="group flex items-center gap-2 px-6 py-3 border border-purple-700/50 hover:border-purple-600 rounded-full font-poppins font-semibold transition-all duration-300 hover:bg-purple-700/20 text-white">
+              Explore My Skills
+              <ChevronDown size={18} className="group-hover:translate-y-1 transition-transform" />
+            </button>
+          </Link>
         </div>
 
         {/* Right Side - 3D Character and Icons */}
@@ -155,7 +164,7 @@ export default function Hero() {
       {/* Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
         <p className="text-xs text-gray-400 mb-2">Scroll to explore</p>
-        <svg className="w-6 h-6 mx-auto text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-6 h-6 mx-auto text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
         </svg>
       </div>

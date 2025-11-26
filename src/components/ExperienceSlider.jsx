@@ -9,10 +9,10 @@ export default function ExperienceSlider() {
   const experiences = [
     {
       id: 1,
-      company: 'Tech Startup Inc',
-      position: 'Frontend Developer',
-      years: '2022 - 2023',
-      description: 'Built responsive web applications using React and Tailwind CSS. Collaborated with design teams to implement pixel-perfect UI components and optimized performance.',
+      company: 'Ceyentra Technologies',
+      position: 'Software Engineer Intern',
+      years: '2024 - 2025',
+      description: 'Built responsive web applications using React and Tailwind CSS. Collaborated with design teams to implement pixel-perfect UI components and optimized performance contributed to the Visitor Tag Management System .',
       logo: 'https://via.placeholder.com/80/7c3aed/ffffff?text=TSI',
       tools: ['React', 'Tailwind CSS', 'JavaScript', 'Figma'],
     },
