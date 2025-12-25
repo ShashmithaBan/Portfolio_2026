@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { ThemeContext } from '../context/ThemeContext';
 
 export default function AnimatedTitle() {
+  const { isDark } = useContext(ThemeContext);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [displayText, setDisplayText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
@@ -55,7 +57,7 @@ export default function AnimatedTitle() {
 
   return (
     <div className="min-h-24 lg:min-h-32">
-      <h1 className="text-5xl lg:text-6xl font-display font-bold leading-tight text-white">
+      <h1 className={`text-5xl lg:text-6xl font-mono font-bold leading-tight ${isDark ? 'text-white' : 'text-[#64748b]'}`}>
        Devops  <br/> Enthusiast
         {/* {firstLine}
         <br />

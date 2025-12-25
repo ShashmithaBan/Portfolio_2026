@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { ChevronUp, ChevronDown } from 'lucide-react';
+import { ThemeContext } from '../context/ThemeContext';
 
 export default function ExperienceSlider() {
+  const { isDark } = useContext(ThemeContext);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState('up');
   const [autoPlay, setAutoPlay] = useState(true);
@@ -13,26 +15,26 @@ export default function ExperienceSlider() {
       position: 'Software Engineer Intern',
       years: '2024 - 2025',
       description: 'Built responsive web applications using React and Tailwind CSS. Collaborated with design teams to implement pixel-perfect UI components and optimized performance contributed to the Visitor Tag Management System .',
-      logo: 'https://via.placeholder.com/80/7c3aed/ffffff?text=TSI',
+      logo: '/ceyentra.jpeg',
       tools: ['React', 'Tailwind CSS', 'JavaScript', 'Figma'],
     },
     {
       id: 2,
-      company: 'Cloud Systems Ltd',
-      position: 'Full Stack Developer',
-      years: '2023 - 2024',
-      description: 'Developed end-to-end web applications with Node.js backend and React frontend. Implemented CI/CD pipelines and containerized applications using Docker.',
-      logo: 'https://via.placeholder.com/80/2563eb/ffffff?text=CSL',
-      tools: ['Node.js', 'React', 'MongoDB', 'Docker', 'AWS'],
+      company: 'IEEE Student Branch University of Kelaniya',
+      position: 'Vice Chairperson',
+      years: '2024 - 2025',
+      description: 'At that time I help lead and organize various technical events, workshops, and seminars for students. My role involves coordinating with team members, managing event logistics, and fostering a collaborative environment to enhance the learning experience for all members.',
+      logo: '/ieee.png',
+      tools: [],
     },
     {
       id: 3,
-      company: 'DevOps Solutions',
-      position: 'DevOps Engineer',
-      years: '2024 - Present',
-      description: 'Orchestrated Kubernetes deployments and managed infrastructure on AWS. Implemented monitoring solutions and automated deployment pipelines for microservices.',
-      logo: 'https://via.placeholder.com/80/10b981/ffffff?text=DOS',
-      tools: ['Kubernetes', 'Docker', 'AWS', 'Terraform', 'Jenkins'],
+      company: 'Rotaract Club of University of Kelaniya',
+      position: 'Team Leader - Digital media ',
+      years: '2023 - 2024',
+      description: 'I lead the team managing the club’s online presence, overseeing content creation, digital campaigns, and promotional designs. I strategize to boost engagement and enhance visibility for the club’s key initiatives.',
+      logo: '/RACUOK.png',
+      tools: ['Adobe Photoshop', 'Canva', 'Adobe Premiere Pro' , 'After Effects'],
     },
   ];
 
@@ -65,56 +67,77 @@ export default function ExperienceSlider() {
   const currentExperience = experiences[currentIndex];
 
   return (
-    <div className="relative w-11/12 h-72 bg-purple-900/10 backdrop-blur-md border border-purple-700/30 rounded-3xl p-6 overflow-hidden group">
+    <div className={`relative w-full sm:w-11/12 h-auto min-h-64 sm:h-72 backdrop-blur-md rounded-2xl sm:rounded-3xl p-4 sm:p-6 overflow-hidden group ${
+      isDark
+        ? 'bg-[#B85252]/10 border border-[#B85252]/30'
+        : 'bg-[#64748b]/10 border border-[#64748b]/30'
+    }`}>
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-linear-to-br from-purple-950/40 to-transparent rounded-3xl" />
+      <div className={`absolute inset-0 rounded-2xl sm:rounded-3xl ${
+        isDark
+          ? 'bg-linear-to-br from-black/40 to-transparent'
+          : 'bg-linear-to-br from-white/40 to-transparent'
+      }`} />
 
       {/* Content wrapper with animation */}
-      <div className="relative h-full flex flex-col justify-between z-10">
+      <div className="relative h-full flex flex-col justify-between z-10 gap-3 sm:gap-4">
         {/* Header with logo and company info */}
-        <div className="flex items-start gap-6 mb-4">
+        <div className="flex items-start gap-3 sm:gap-6">
           {/* Company Logo */}
-          <div className="w-16 h-16 rounded-2xl bg-linear-to-br from-purple-600 to-purple-900 flex items-center justify-center shrink-0 shadow-lg">
+          <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl flex items-center justify-center shrink-0 shadow-lg bg-white">
             <img 
               src={currentExperience.logo} 
               alt={currentExperience.company}
-              className="w-16 h-16 object-cover rounded-xl"
+              className="w-12 h-12 sm:w-16 sm:h-16 object-contain rounded-lg sm:rounded-xl"
             />
           </div>
 
           {/* Company and Position */}
-          <div className="flex-1">
-            <h3 className="text-2xl font-poppins font-bold text-white">
+          <div className="flex-1 min-w-0">
+            <h3 className={`text-base sm:text-2xl font-mono font-bold truncate ${isDark ? 'text-white' : 'text-[#64748b]'}`}>
               {currentExperience.position}
             </h3>
-            <p className="text-purple-300 text-sm font-medium">{currentExperience.company}</p>
-            <p className="text-gray-400 text-xs mt-1">{currentExperience.years}</p>
+            <p className={`text-xs sm:text-sm font-medium truncate ${isDark ? 'text-[#F58840]' : 'text-[#64748b]'}`}>{currentExperience.company}</p>
+            <p className={`text-xs mt-0.5 sm:mt-1 ${isDark ? 'text-[#EADEDE]' : 'text-[#64748b]/70'}`}>{currentExperience.years}</p>
           </div>
         </div>
 
         {/* Description */}
-        <div className="">
-          <p className="text-gray-300 text-sm leading-relaxed font-light">
+        <div className="flex-1">
+          <p className={`text-xs sm:text-sm leading-relaxed font-light line-clamp-3 sm:line-clamp-none ${isDark ? 'text-gray-300' : 'text-[#64748b]'}`}>
             {currentExperience.description}
           </p>
         </div>
 
         {/* Tools/Skills */}
-        <div className="flex flex-wrap gap-2 ">
-          {currentExperience.tools.map((tool, index) => (
+        <div className="flex flex-wrap gap-1.5 sm:gap-2">
+          {currentExperience.tools.slice(0, 4).map((tool, index) => (
             <span
               key={index}
-              className="px-3 py-1 bg-purple-700/30 border border-purple-600/50 rounded-full text-xs text-purple-200 font-light"
+              className={`px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-light ${
+                isDark
+                  ? 'bg-[#F58840]/10 border border-[#F58840]/20 text-[#F58840]'
+                  : 'bg-[#64748b]/20 border border-[#64748b]/40 text-[#64748b]'
+              }`}
             >
               {tool}
             </span>
           ))}
+          {currentExperience.tools.length > 4 && (
+            <span className={`px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-light ${
+              isDark
+                ? 'bg-[#F58840]/10 border border-[#F58840]/20 text-[#F58840]'
+                : 'bg-[#64748b]/20 border border-[#64748b]/40 text-[#64748b]'
+            }`}>
+              +{currentExperience.tools.length - 4}
+            </span>
+          )}
         </div>
 
         {/* Navigation and indicators */}
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between mt-2 sm:mt-0">
           {/* Indicators */}
-          <div className="flex gap-2">
+          <div className="flex gap-1.5 sm:gap-2">
             {experiences.map((_, index) => (
               <button
                 key={index}
@@ -123,37 +146,45 @@ export default function ExperienceSlider() {
                   setCurrentIndex(index);
                   setAutoPlay(true);
                 }}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                className={`w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full transition-all duration-300 ${
                   index === currentIndex
-                    ? 'bg-purple-500 w-8'
-                    : 'bg-gray-600 hover:bg-gray-500'
+                    ? isDark ? 'bg-[#F58840] w-6 sm:w-8' : 'bg-[#64748b] w-6 sm:w-8'
+                    : isDark ? 'bg-gray-600 hover:bg-gray-500' : 'bg-[#64748b]/40 hover:bg-[#64748b]/60'
                 }`}
               />
             ))}
           </div>
 
           {/* Navigation buttons */}
-          <div className="flex gap-3">
+          <div className="flex gap-2 sm:gap-3">
             <button
               onClick={handlePrev}
-              className="p-2 rounded-full border border-purple-600/50 hover:border-purple-500 hover:bg-purple-700/20 transition transform hover:scale-110 text-purple-300 hover:text-purple-200"
+              className={`p-1.5 sm:p-2 rounded-full transition transform hover:scale-110 ${
+                isDark
+                  ? 'border border-[#F58840]/50 hover:border-[#F58840] hover:bg-[#F58840]/20 text-[#F58840] hover:text-[#F58840]'
+                  : 'border border-[#64748b]/50 hover:border-[#64748b] hover:bg-[#64748b]/20 text-[#64748b] hover:text-[#64748b]'
+              }`}
               aria-label="Previous experience"
             >
-              <ChevronUp size={20} />
+              <ChevronUp size={16} className="sm:w-5 sm:h-5" />
             </button>
             <button
               onClick={handleNext}
-              className="p-2 rounded-full border border-purple-600/50 hover:border-purple-500 hover:bg-purple-700/20 transition transform hover:scale-110 text-purple-300 hover:text-purple-200"
+              className={`p-1.5 sm:p-2 rounded-full transition transform hover:scale-110 ${
+                isDark
+                  ? 'border border-[#F58840]/50 hover:border-[#F58840] hover:bg-[#F58840]/20 text-[#F58840] hover:text-[#F58840]'
+                  : 'border border-[#64748b]/50 hover:border-[#64748b] hover:bg-[#64748b]/20 text-[#64748b] hover:text-[#64748b]'
+              }`}
               aria-label="Next experience"
             >
-              <ChevronDown size={20} />
+              <ChevronDown size={16} className="sm:w-5 sm:h-5" />
             </button>
           </div>
         </div>
       </div>
 
       {/* Slide counter */}
-      <div className="absolute top-6 right-8 text-xs text-gray-500 font-light">
+      <div className={`absolute top-3 sm:top-6 right-4 sm:right-8 text-[10px] sm:text-xs font-light ${isDark ? 'text-gray-500' : 'text-[#64748b]/60'}`}>
         {currentIndex + 1} / {experiences.length}
       </div>
     </div>

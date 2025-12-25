@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Mail, Github, Linkedin, Instagram, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { ThemeContext } from '../context/ThemeContext';
 import ExperienceSlider from './ExperienceSlider';
 import AnimatedTitle from './AnimatedTitle';
 
 export default function Hero() {
+  const { isDark, dark, light } = useContext(ThemeContext);
+  const currentTheme = isDark ? dark : light;
+
   // Generate random stars
   const stars = Array.from({ length: 50 }, (_, i) => ({
     id: i,
@@ -14,7 +18,7 @@ export default function Hero() {
   }));
 
   return (
-    <section className="min-h-screen pt-32 px-6 flex items-center justify-center relative overflow-hidden pb-96 lg:pb-0">
+    <section className={`min-h-screen pt-20 sm:pt-32 lg:pt-32 px-4 sm:px-6 lg:px-8 flex items-center justify-center relative overflow-hidden pb-24 sm:pb-32 lg:pb-0 bg-gradient-to-br ${currentTheme.bg} ${currentTheme.text}`}>
       {/* Star Background */}
       <div className="absolute inset-0 pointer-events-none">
         {stars.map((star) => (
@@ -32,60 +36,54 @@ export default function Hero() {
 
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 right-10 w-96 h-96 bg-purple-800/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 left-10 w-96 h-96 bg-purple-700/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className={`absolute top-20 right-10 w-96 h-96 rounded-full blur-3xl animate-pulse ${currentTheme.orbBg}`}></div>
+        <div className={`absolute bottom-20 left-10 w-96 h-96 rounded-full blur-3xl animate-pulse ${currentTheme.accentBgLighter}`} style={{ animationDelay: '1s' }}></div>
       </div>
 
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-1 items-center relative z-10 w-full">
-        {/* Left Content */}
-        <div className="space-y-8">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-1 items-center relative z-10 w-full">
+        {/* Left Content - Order 1 on mobile, Order 1 on desktop */}
+        <div className="space-y-6 sm:space-y-8 order-1">
           {/* Main Title */}
           <div className="space-y-2">
-            <p className="text-purple-600 text-lg font-sans font-medium tracking-wide">Hey, I'm <span className="text-white font-semibold">Shashmitha Bandara</span></p>
+            <p className={`text-sm sm:text-base lg:text-lg font-sans font-medium tracking-wide ${currentTheme.accent}`}>Hey, I'm <span className={`font-semibold ${currentTheme.text}`}>Shashmitha Bandara</span></p>
             <AnimatedTitle />
-            <p className="text-gray-300 text-md max-w-lg leading-relaxed font-poppins font-light">
+            <p className={`text-xs sm:text-sm lg:text-base max-w-lg leading-relaxed font-mono font-light ${currentTheme.textSecondary}`}>
              Passionate Software Engineering Undergraduate specializing in DevOps and Cloud (Kubernetes, Docker, AWS), recognized for outstanding leadership and scalable software solutions.
             </p>
           </div>
 
           {/* CTA Buttons */}
-          <div className="flex gap-6 items-center pt-2">
-            <button className="px-8 py-3 bg-purple-700 hover:bg-purple-800 rounded-full font-poppins font-semibold transition transform hover:scale-105 tracking-wide text-white shadow-lg shadow-purple-700/50">
+          <div className="flex flex-wrap gap-3 sm:gap-6 items-center pt-2">
+            <button className={`px-6 sm:px-8 py-2 sm:py-3 text-sm sm:text-base rounded-full font-mono font-semibold transition transform hover:scale-105 tracking-wide shadow-lg ${currentTheme.accentBg} ${currentTheme.bgButtonHover} ${isDark ? 'text-black' : 'text-white'} ${currentTheme.shadow}`}>
               Hire me
             </button>
             <a href='https://www.instagram.com/shashmitha_001/'>
-            <button className="p-3 border border-white/20 hover:border-purple-600 rounded-full transition transform hover:scale-105"   linked="https://www.instagram.com/shashmitha_001/">
-              <Instagram size={20} className="hover:text-purple-600" />
+            <button className={`p-3 border rounded-full transition transform hover:scale-105 ${currentTheme.borderLight} ${currentTheme.cardBorderHover}`} linked="https://www.instagram.com/shashmitha_001/">
+              <Instagram size={20} className={currentTheme.accentHover} />
              
             </button></a>
              <a href='https://github.com/ShashmithaBan'>
-            <button className="p-3 border border-white/20 hover:border-purple-600 rounded-full transition transform hover:scale-105" linked="https://github.com/ShashmithaBan">
-              <Github size={20} className="hover:text-purple-600" />
+            <button className={`p-3 border rounded-full transition transform hover:scale-105 ${currentTheme.borderLight} ${currentTheme.cardBorderHover}`} linked="https://github.com/ShashmithaBan">
+              <Github size={20} className={currentTheme.accentHover} />
             </button></a>
              <a href='https://www.linkedin.com/in/shashmitha-bandara-90180225a/'>
-            <button className="p-3 border border-white/20 hover:border-purple-600 rounded-full transition transform hover:scale-105" linked="https://www.linkedin.com/in/shashmitha-bandara-90180225a/">
-              <Linkedin size={20} className="hover:text-purple-600" />
+            <button className={`p-3 border rounded-full transition transform hover:scale-105 ${currentTheme.borderLight} ${currentTheme.cardBorderHover}`} linked="https://www.linkedin.com/in/shashmitha-bandara-90180225a/">
+              <Linkedin size={20} className={currentTheme.accentHover} />
             </button></a>
              <a href='mailto:gimansabandara2001@gmail.com"'>
-            <button className="p-3 border border-white/20 hover:border-purple-600 rounded-full transition transform hover:scale-105" linked="mailto:gimansabandara2001@gmail.com">
-              <Mail size={20} className="hover:text-purple-600" />
+            <button className={`p-3 border rounded-full transition transform hover:scale-105 ${currentTheme.borderLight} ${currentTheme.cardBorderHover}`} linked="mailto:gimansabandara2001@gmail.com">
+              <Mail size={20} className={currentTheme.accentHover} />
             </button></a>
           </div>
 
           {/* Experience Slider */}
           <ExperienceSlider />
 
-          {/* Explore Button */}
-          <Link to="/skills" className="inline-block mt-8">
-            <button className="group flex items-center gap-2 px-6 py-3 border border-purple-700/50 hover:border-purple-600 rounded-full font-poppins font-semibold transition-all duration-300 hover:bg-purple-700/20 text-white">
-              Explore My Skills
-              <ChevronDown size={18} className="group-hover:translate-y-1 transition-transform" />
-            </button>
-          </Link>
+        
         </div>
 
-        {/* Right Side - 3D Character and Icons */}
-        <div className="relative h-full min-h-96 flex items-center justify-center lg:justify-end">
+        {/* Right Side - 3D Character and Icons - Order 2 on mobile (appears after content), Order 2 on desktop */}
+        <div className="relative h-72 sm:h-96 lg:h-full lg:min-h-96 flex items-end sm:items-center justify-center lg:justify-end order-2 mt-6 lg:mt-0 pb-4 sm:pb-0">
           
           {/* Orbit Path Visualization - Desktop Only */}
           <svg className="hidden lg:block absolute inset-0 w-full h-full pointer-events-none" style={{ maxWidth: '800px', maxHeight: '600px', left: '58%', top: '40%', transform: 'translate(-50%, -50%)' }}>
@@ -110,64 +108,68 @@ export default function Hero() {
           {/* Orbiting Icons Container - Synced with SVG center */}
           <div className="absolute flex items-center justify-center pointer-events-none" style={{ left: '58%', top: '40%', transform: 'translate(-50%, -50%)' }}>
             {/* Icon 1 - Terraform */}
-            <div className="orbit-icon absolute w-24 h-24 bg-purple-700/30 backdrop-blur-md border border-purple-600/50 rounded-xl flex items-center justify-center shadow-lg shadow-purple-700/20 pointer-events-auto overflow-hidden">
+            <div className={`orbit-icon absolute w-24 h-24 backdrop-blur-md rounded-xl flex items-center justify-center shadow-lg pointer-events-auto overflow-hidden ${currentTheme.bgCard} ${currentTheme.cardBorder} ${currentTheme.shadowLighter}`}>
               <img src="/logo/terraform-hashicorp-logo-920x920-sue-v0-920x613.png" alt="Terraform" className="w-16 h-16 object-contain" />
             </div>
 
             {/* Icon 2 - Docker */}
-            <div className="orbit-icon absolute w-24 h-24 bg-blue-400/20 backdrop-blur-md border border-blue-400/40 rounded-xl flex items-center justify-center shadow-lg shadow-blue-400/20 pointer-events-auto overflow-hidden">
+            <div className={`orbit-icon absolute w-24 h-24 backdrop-blur-md rounded-xl flex items-center justify-center shadow-lg pointer-events-auto overflow-hidden ${isDark ? 'bg-blue-400/20 border border-blue-400/40 shadow-blue-400/20' : `${currentTheme.bgSecondary} ${currentTheme.cardBorder} ${currentTheme.shadowLighter}`}`}>
               <img src="/logo/images-Photoroom.png" alt="Docker" className="w-16 h-16 object-contain" />
             </div>
 
             {/* Icon 3 - Kubernetes */}
-            <div className="orbit-icon absolute w-24 h-24 bg-green-400/20 backdrop-blur-md border border-green-400/40 rounded-xl flex items-center justify-center shadow-lg shadow-green-400/20 pointer-events-auto overflow-hidden">
+            <div className={`orbit-icon absolute w-24 h-24 backdrop-blur-md rounded-xl flex items-center justify-center shadow-lg pointer-events-auto overflow-hidden ${isDark ? 'bg-green-400/20 border border-green-400/40 shadow-green-400/20' : `${currentTheme.bgSecondary} ${currentTheme.cardBorder} ${currentTheme.shadowLighter}`}`}>
               <img src="/logo/Kubernetes-Logo.wine.png" alt="Kubernetes" className="w-52 h-52 object-contain" />
             </div>
 
             {/* Icon 4 - AWS */}
-            <div className="orbit-icon absolute w-24 h-24 bg-purple-700/30 backdrop-blur-md border border-purple-600/50 rounded-xl flex items-center justify-center shadow-lg shadow-purple-700/20 pointer-events-auto overflow-hidden">
+            <div className={`orbit-icon absolute w-24 h-24 backdrop-blur-md rounded-xl flex items-center justify-center shadow-lg pointer-events-auto overflow-hidden ${currentTheme.bgCard} ${currentTheme.cardBorder} ${currentTheme.shadowLighter}`}>
               <img src="/logo/f48aadd7-3fa2-4218-bebf-597021659f2b-cover-Photoroom.png" alt="AWS" className="w-16 h-16 object-contain" />
             </div>
 
             {/* Icon 5 - GitHub */}
-            <div className="orbit-icon absolute w-24 h-24 bg-gray-200/20 backdrop-blur-md border border-gray-400/40 rounded-xl flex items-center justify-center shadow-lg shadow-gray-400/20 pointer-events-auto overflow-hidden">
+            <div className={`orbit-icon absolute w-24 h-24 backdrop-blur-md rounded-xl flex items-center justify-center shadow-lg pointer-events-auto overflow-hidden ${isDark ? 'bg-gray-200/20 border border-gray-400/40 shadow-gray-400/20' : `${currentTheme.bgSecondary} ${currentTheme.cardBorder} ${currentTheme.shadowLighter}`}`}>
               <img src="/logo/25231.png" alt="GitHub" className="w-16 h-16 object-contain" />
             </div>
 
             {/* Icon 6 - Linux */}
-            <div className="orbit-icon absolute w-24 h-24 bg-orange-400/20 backdrop-blur-md border border-orange-400/40 rounded-xl flex items-center justify-center shadow-lg shadow-orange-400/20 pointer-events-auto overflow-hidden">
+            <div className={`orbit-icon absolute w-24 h-24 backdrop-blur-md rounded-xl flex items-center justify-center shadow-lg pointer-events-auto overflow-hidden ${isDark ? 'bg-orange-400/20 border border-orange-400/40 shadow-orange-400/20' : `${currentTheme.bgSecondary} ${currentTheme.cardBorder} ${currentTheme.shadowLighter}`}`}>
               <img src="/logo/computer-illustration-linux-tux-as-logo-illustration-isolated-white-background-tux-penguin-character-258590115-Photoroom.png" alt="Linux" className="w-16 h-16 object-contain" />
             </div>
 
             {/* Icon 7 - React */}
-            <div className="orbit-icon absolute w-24 h-24 bg-cyan-400/20 backdrop-blur-md border border-cyan-400/40 rounded-xl flex items-center justify-center shadow-lg shadow-cyan-400/20 pointer-events-auto overflow-hidden">
+            <div className={`orbit-icon absolute w-24 h-24 backdrop-blur-md rounded-xl flex items-center justify-center shadow-lg pointer-events-auto overflow-hidden ${isDark ? 'bg-cyan-400/20 border border-cyan-400/40 shadow-cyan-400/20' : `${currentTheme.bgSecondary} ${currentTheme.cardBorder} ${currentTheme.shadowLighter}`}`}>
               <img src="/logo/react-1.svg" alt="React" className="w-16 h-16 object-contain" />
             </div>
 
             {/* Icon 8 - Spring Boot */}
-            <div className="orbit-icon absolute w-24 h-24 bg-green-500/20 backdrop-blur-md border border-green-500/40 rounded-xl flex items-center justify-center shadow-lg shadow-green-500/20 pointer-events-auto overflow-hidden">
+            <div className={`orbit-icon absolute w-24 h-24 backdrop-blur-md rounded-xl flex items-center justify-center shadow-lg pointer-events-auto overflow-hidden ${isDark ? 'bg-green-500/20 border border-green-500/40 shadow-green-500/20' : `${currentTheme.bgSecondary} ${currentTheme.cardBorder} ${currentTheme.shadowLighter}`}`}>
               <img src="/logo/spring-boot-logo-icon.webp" alt="Spring Boot" className="w-16 h-16 object-contain" />
             </div>
           </div>
 
           {/* Character Image */}
-          <div className="w-lg h-lg flex items-center justify-center bottom-4 relative z-10">
+          <div className="w-80 h-80 mt-20 md:mt-6 sm:w-80 sm:h-80 lg:w-auto lg:h-auto flex items-center justify-center relative z-10">
             <img 
               src="/character.png" 
               alt="Noah - Web Developer" 
-              className="w-lg h-lg object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500 animate-character-float"
+              className={`w-full h-full lg:w-lg lg:h-lg object-contain hover:scale-105 transition-all duration-500 ${isDark ? 'animate-character-float' : 'animate-character-float-light'}`}
             />
           </div>
         </div>
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+     
+      {/* <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+         <Link to="/skills" className="inline-block mt-8"></Link>
         <p className="text-xs text-gray-400 mb-2">Scroll to explore</p>
         <svg className="w-6 h-6 mx-auto text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
         </svg>
-      </div>
+        </Link>
+      </div> */}
+      
     </section>
   );
 }

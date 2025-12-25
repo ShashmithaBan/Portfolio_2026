@@ -55,24 +55,51 @@ h2 {
   animation: float 3s ease-in-out infinite;
 }
 
-/* Cool character animation - floating with slight rotation and glow */
 @keyframes characterFloat {
   0%, 100% {
     transform: translateY(0px) rotateZ(-2deg) scale(1);
-    filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.4));
+    filter: drop-shadow(0 0 12px rgba(251, 191, 36, 0.3));
   }
   25% {
     transform: translateY(-30px) rotateZ(1deg) scale(1.02);
-    filter: drop-shadow(0 0 30px rgba(139, 92, 246, 0.6));
+    filter: drop-shadow(0 0 18px rgba(251, 191, 36, 0.4));
   }
   50% {
     transform: translateY(-50px) rotateZ(-1deg) scale(1);
-    filter: drop-shadow(0 0 40px rgba(168, 85, 247, 0.8));
+    filter: drop-shadow(0 0 24px rgba(251, 191, 36, 0.5));
   }
   75% {
     transform: translateY(-30px) rotateZ(2deg) scale(1.02);
-    filter: drop-shadow(0 0 30px rgba(139, 92, 246, 0.6));
+    filter: drop-shadow(0 0 18px rgba(251, 191, 36, 0.4));
   }
+}
+
+.animate-character-float {
+  animation: characterFloat 4s ease-in-out infinite;
+}
+
+/* Character animation - floating with slight rotation and glow - LIGHT THEME */
+@keyframes characterFloatLight {
+  0%, 100% {
+    transform: translateY(0px) rotateZ(-2deg) scale(1);
+    filter: drop-shadow(0 0 12px rgba(100, 116, 139, 0.15));
+  }
+  25% {
+    transform: translateY(-30px) rotateZ(1deg) scale(1.02);
+    filter: drop-shadow(0 0 18px rgba(100, 116, 139, 0.2));
+  }
+  50% {
+    transform: translateY(-50px) rotateZ(-1deg) scale(1);
+    filter: drop-shadow(0 0 24px rgba(100, 116, 139, 0.25));
+  }
+  75% {
+    transform: translateY(-30px) rotateZ(2deg) scale(1.02);
+    filter: drop-shadow(0 0 18px rgba(100, 116, 139, 0.2));
+  }
+}
+
+.animate-character-float-light {
+  animation: characterFloatLight 4s ease-in-out infinite;
 }
 
 .animate-character-float {

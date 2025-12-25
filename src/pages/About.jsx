@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Mail, Github, Linkedin, Instagram } from 'lucide-react';
+import { ThemeContext } from '../context/ThemeContext';
 
 export default function About() {
+  const { isDark, dark, light } = useContext(ThemeContext);
+  const currentTheme = isDark ? dark : light;
   const skills = [
-    { name: 'Terraform', icon: '/logo/terraform-hashicorp-logo-920x920-sue-v0-920x613.png', color: 'from-purple-600 to-purple-900' },
+    { name: 'Terraform', icon: '/logo/terraform-hashicorp-logo-920x920-sue-v0-920x613.png', color: 'from-yellow-600 to-yellow-600' },
     { name: 'Docker', icon: '/logo/images-Photoroom.png', color: 'from-blue-500 to-blue-900' },
     { name: 'Kubernetes', icon: '/logo/Kubernetes-Logo.wine.png', color: 'from-green-500 to-green-900' },
     { name: 'AWS', icon: '/logo/f48aadd7-3fa2-4218-bebf-597021659f2b-cover-Photoroom.png', color: 'from-yellow-500 to-orange-900' },
     { name: 'GitHub', icon: '/logo/25231.png', color: 'from-gray-600 to-gray-900' },
-    { name: 'Linux', icon: '/logo/computer-illustration-linux-tux-as-logo-illustration-isolated-white-background-tux-penguin-character-258590115.webp', color: 'from-orange-500 to-orange-900' },
+    { name: 'Linux', icon: '/logo/computer-illustration-linux-tux-as-logo-illustration-isolated-white-background-tux-penguin-character-258590115-Photoroom.png', color: 'from-orange-500 to-orange-900' },
     { name: 'React', icon: '/logo/react-1.svg', color: 'from-cyan-400 to-cyan-900' },
     { name: 'Spring Boot', icon: '/logo/spring-boot-logo-icon.webp', color: 'from-green-600 to-green-900' },
   ];
@@ -42,7 +45,7 @@ export default function About() {
   ];
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-slate-900 via-purple-950 to-slate-900 pt-32 pb-20">
+    <div className={`min-h-screen bg-gradient-to-br ${currentTheme.bg} pt-20 sm:pt-24 lg:pt-32 pb-24 sm:pb-32 lg:pb-20 ${currentTheme.text}`}>
       {/* Star Background */}
       <div className="fixed inset-0 pointer-events-none">
         {Array.from({ length: 50 }, (_, i) => ({
@@ -63,14 +66,14 @@ export default function About() {
         ))}
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Profile Section */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 sm:mb-14 lg:mb-16">
           <div className="flex justify-center mb-8">
-            <div className="w-48 h-48 lg:w-64 lg:h-64 rounded-full border-4 border-purple-600/50 p-2 bg-linear-to-br from-purple-600/20 to-purple-900/20 hover:border-purple-500 transition-all duration-500 hover:shadow-2xl hover:shadow-purple-900/50">
+            <div className={`w-48 h-48 lg:w-64 lg:h-64 rounded-full border-4 p-2 bg-linear-to-br transition-all duration-500 hover:shadow-2xl ${currentTheme.cardBorder} ${currentTheme.accentBgLight} ${currentTheme.cardBorderHover} ${currentTheme.shadow}`}>
               <div className="w-full h-full rounded-full overflow-hidden bg-gray-800 flex items-center justify-center">
                 <img 
-                  src="/character.png" 
+                  src="/Shashmitha.jpg" 
                   alt="Profile" 
                   className="w-full h-full object-cover"
                 />
@@ -78,47 +81,47 @@ export default function About() {
             </div>
           </div>
 
-          <h1 className="text-5xl lg:text-6xl font-display font-bold text-white mb-4">
-            Hi, I'm <span className="bg-linear-to-r from-purple-600 to-purple-400 bg-clip-text text-transparent">Noah</span>
+          <h1 className={`text-5xl lg:text-6xl font-mono font-bold mb-4 ${currentTheme.textWhite}`}>
+            Hi, I'm <span className={`bg-linear-to-r bg-clip-text text-transparent ${currentTheme.gradient}`}>Shashmitha</span>
           </h1>
 
-          <p className="text-xl text-purple-400 font-poppins font-semibold mb-6">
+          <p className={`text-xl font-mono font-semibold mb-6 ${currentTheme.textSecondary}`}>
             Final Year Undergraduate | DevOps Enthusiast | Full Stack Developer
           </p>
 
-          <div className="max-w-3xl mx-auto space-y-6 text-gray-300 leading-relaxed">
+          <div className={`max-w-3xl mx-auto space-y-6 leading-relaxed ${currentTheme.textGray}`}>
             <p className="text-base lg:text-lg">
-              Passionate Software Engineering Undergraduate at the <span className="text-purple-400 font-semibold">University of Kelaniya, Sri Lanka</span>, with a strong enthusiasm for DevOps and modern cloud technologies.
+              Passionate Software Engineering Undergraduate at the <span className={`font-semibold ${currentTheme.accent}`}>University of Kelaniya, Sri Lanka</span>, with a strong enthusiasm for DevOps and modern cloud technologies.
             </p>
 
             <p className="text-base lg:text-lg">
-              Skilled in <span className="text-purple-400 font-semibold">AWS, Docker, Linux, Terraform and Kubernetes (K8s)</span>, with hands-on experience in building automated and scalable solutions.
+              Skilled in <span className={`font-semibold ${currentTheme.accent}`}>AWS, Docker, Linux, Terraform and Kubernetes (K8s)</span>, with hands-on experience in building automated and scalable solutions.
             </p>
 
             <p className="text-base lg:text-lg">
               I'm driven by a desire to leverage technology to create impactful and innovative systems that make a real difference.
             </p>
 
-            <div className="pt-4 border-t border-purple-700/30">
+            <div className={`pt-4 border-t ${currentTheme.borderLight}`}>
               <p className="text-base lg:text-lg mb-4">
-                <span className="text-purple-400">Beyond academics,</span> I actively engage in leadership and community initiatives — serving as the <span className="text-purple-400 font-semibold">Vice Chairperson (2023/24)</span> of the <span className="text-purple-400">IEEE Student Branch – University of Kelaniya</span> and the <span className="text-purple-400 font-semibold">Editorial Lead (2022/23)</span> of the same branch.
+                <span className={currentTheme.accent}>Beyond academics,</span> I actively engage in leadership and community initiatives — serving as the <span className={`font-semibold ${currentTheme.accent}`}>Vice Chairperson (2023/24)</span> of the <span className={currentTheme.accent}>IEEE Student Branch – University of Kelaniya</span> and the <span className={`font-semibold ${currentTheme.accent}`}>Editorial Lead (2022/23)</span> of the same branch.
               </p>
 
               <p className="text-base lg:text-lg">
-                In the <span className="text-purple-400">Rotaract Club of the University of Kelaniya</span>, I was the <span className="text-purple-400 font-semibold">Team Leader of the Digital Media Avenue (2022/23)</span> and was honored with awards for <span className="text-purple-400 font-semibold">Most Outstanding PR Coordinator</span> and <span className="text-purple-400 font-semibold">Most Outstanding PR Campaign (2022/23)</span> for my contributions to public relations and digital media efforts.
+                In the <span className={currentTheme.accent}>Rotaract Club of the University of Kelaniya</span>, I was the <span className={`font-semibold ${currentTheme.accent}`}>Team Leader of the Digital Media Avenue (2022/23)</span> and was honored with awards for <span className={`font-semibold ${currentTheme.accent}`}>Most Outstanding PR Coordinator</span> and <span className={`font-semibold ${currentTheme.accent}`}>Most Outstanding PR Campaign (2022/23)</span> for my contributions to public relations and digital media efforts.
               </p>
             </div>
 
-            <p className="text-base lg:text-lg pt-4 italic text-purple-300">
+            <p className={`text-base lg:text-lg pt-4 italic ${currentTheme.accent}`}>
               ⚙️ Constantly learning, building, and collaborating to push the boundaries of technology and creativity
             </p>
           </div>
         </div>
 
         {/* Skills Section */}
-        <div className="mb-20">
-          <h2 className="text-4xl font-display font-bold text-white mb-12 text-center">
-            Technical <span className="bg-linear-to-r from-purple-600 to-purple-400 bg-clip-text text-transparent">Skills</span>
+        {/* <div className="mb-20">
+          <h2 className="text-4xl font-mono font-bold text-white mb-12 text-center">
+            Technical <span className="bg-linear-to-r from-yellow-600 to-yellow-400 bg-clip-text text-transparent">Skills</span>
           </h2>
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
@@ -133,37 +136,37 @@ export default function About() {
                     alt={skill.name}
                     className="w-16 h-16 object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-300"
                   />
-                  <p className="text-white font-poppins font-semibold text-sm mt-3 text-center">
+                  <p className="text-white font-mono font-semibold text-sm mt-3 text-center">
                     {skill.name}
                   </p>
                 </div>
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
 
         {/* Achievements Section */}
         <div className="mb-20">
-          <h2 className="text-4xl font-display font-bold text-white mb-12 text-center">
-            Leadership & <span className="bg-linear-to-r from-purple-600 to-purple-400 bg-clip-text text-transparent">Achievements</span>
+          <h2 className={`text-4xl font-mono font-bold mb-12 text-center ${currentTheme.textWhite}`}>
+            Leadership & <span className={currentTheme.gradientText}>Achievements</span>
           </h2>
 
           <div className="space-y-6">
             {achievements.map((achievement, index) => (
               <div
                 key={index}
-                className="p-6 bg-purple-800/10 backdrop-blur-sm border border-purple-700/30 rounded-2xl hover:border-purple-600/50 hover:bg-purple-800/20 transition-all duration-500 hover:-translate-y-1"
+                className={`p-6 backdrop-blur-sm rounded-2xl transition-all duration-500 hover:-translate-y-1 ${currentTheme.bgCard} ${currentTheme.cardBorder} ${currentTheme.cardBorderHover} ${currentTheme.bgCardHover}`}
               >
                 <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-3 h-3 mt-2 bg-purple-500 rounded-full" />
+                  <div className={`flex-shrink-0 w-3 h-3 mt-2 rounded-full ${currentTheme.dotBg}`} />
                   <div className="flex-grow">
-                    <h3 className="text-xl font-poppins font-semibold text-white mb-2">
+                    <h3 className={`text-xl font-mono font-semibold mb-2 ${currentTheme.textWhite}`}>
                       {achievement.title}
                     </h3>
-                    <p className="text-purple-400 text-sm font-medium mb-2">
+                    <p className={`text-sm font-medium mb-2 ${currentTheme.accent}`}>
                       {achievement.organization}
                     </p>
-                    <p className="text-gray-400 leading-relaxed">
+                    <p className={`leading-relaxed ${currentTheme.textGrayMuted}`}>
                       {achievement.description}
                     </p>
                   </div>
@@ -174,20 +177,20 @@ export default function About() {
         </div>
 
         {/* Social Links */}
-        <div className="text-center pt-12 border-t border-purple-700/30">
-          <p className="text-gray-400 mb-6">Let's connect and collaborate!</p>
+        <div className={`text-center pt-12 border-t ${currentTheme.borderLighter}`}>
+          <p className={`mb-6 ${currentTheme.textGrayMuted}`}>Let's connect and collaborate!</p>
           <div className="flex justify-center gap-6">
-            <a href="#" className="p-4 rounded-full bg-purple-700/20 hover:bg-purple-700/40 transition-all duration-300 hover:-translate-y-2 group">
-              <Mail size={24} className="text-purple-400 group-hover:text-purple-300" />
+            <a href="#" className={`p-4 rounded-full transition-all duration-300 hover:-translate-y-2 group ${currentTheme.accentBgLight} ${currentTheme.bgCardHover}`}>
+              <Mail size={24} className={`${currentTheme.accent}`} />
             </a>
-            <a href="#" className="p-4 rounded-full bg-purple-700/20 hover:bg-purple-700/40 transition-all duration-300 hover:-translate-y-2 group">
-              <Github size={24} className="text-purple-400 group-hover:text-purple-300" />
+            <a href="#" className={`p-4 rounded-full transition-all duration-300 hover:-translate-y-2 group ${currentTheme.accentBgLight} ${currentTheme.bgCardHover}`}>
+              <Github size={24} className={`${currentTheme.accent}`} />
             </a>
-            <a href="#" className="p-4 rounded-full bg-purple-700/20 hover:bg-purple-700/40 transition-all duration-300 hover:-translate-y-2 group">
-              <Linkedin size={24} className="text-purple-400 group-hover:text-purple-300" />
+            <a href="#" className={`p-4 rounded-full transition-all duration-300 hover:-translate-y-2 group ${currentTheme.accentBgLight} ${currentTheme.bgCardHover}`}>
+              <Linkedin size={24} className={`${currentTheme.accent}`} />
             </a>
-            <a href="#" className="p-4 rounded-full bg-purple-700/20 hover:bg-purple-700/40 transition-all duration-300 hover:-translate-y-2 group">
-              <Instagram size={24} className="text-purple-400 group-hover:text-purple-300" />
+            <a href="#" className={`p-4 rounded-full transition-all duration-300 hover:-translate-y-2 group ${currentTheme.accentBgLight} ${currentTheme.bgCardHover}`}>
+              <Instagram size={24} className={`${currentTheme.accent}`} />
             </a>
           </div>
         </div>

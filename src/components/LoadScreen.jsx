@@ -1,53 +1,57 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { ThemeContext } from '../context/ThemeContext';
 
 export default function LoadScreen({ onVisibilityChange }) {
+  const { isDark } = useContext(ThemeContext);
   const [isVisible, setIsVisible] = useState(true);
-  const [autoIndex, setAutoIndex] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const [stageIndex, setStageIndex] = useState(0);
 
-  const tools = [
-    { name: 'Terraform', icon: '/logo/terraform-hashicorp-logo-920x920-sue-v0-920x613.png', color: 'from-purple-600 to-purple-900' },
-    { name: 'Docker', icon: '/logo/images-Photoroom.png', color: 'from-purple-600 to-purple-900' },
-    { name: 'AWS', icon: '/logo/f48aadd7-3fa2-4218-bebf-597021659f2b-cover-Photoroom.png', color: 'from-purple-600 to-purple-900'},
-    { name: 'GitHub', icon: '/logo/25231.png', color: 'from-purple-600 to-purple-900' },
-    { name: 'Linux', icon: '/logo/computer-illustration-linux-tux-as-logo-illustration-isolated-white-background-tux-penguin-character-258590115-Photoroom.png', color: 'from-purple-600 to-purple-900'},
-    { name: 'React', icon: '/logo/react-1.svg', color: 'from-purple-600 to-purple-900' },
-    { name: 'Spring Boot', icon: '/logo/spring-boot-logo-icon.webp', color: 'from-purple-600 to-purple-900' },
-    { name: 'Kubernetes', icon: '/logo/Kubernetes-Logo.wine.png', color: 'from-purple-600 to-purple-900' },
+  const stages = [
+    { title: 'Initializing', icon: '⚡', description: 'Spinning up containers...' },
+    { title: 'Building', icon: '🔨', description: 'Compiling Docker images...' },
+    { title: 'Testing', icon: '🧪', description: 'Running automated tests...' },
+    { title: 'Deploying', icon: '🚀', description: 'Pushing to Kubernetes cluster...' },
+    { title: 'Live', icon: '✨', description: 'Production deployment complete!' },
   ];
 
-  // Auto-play animation on all screens: show immediately, advance 2 tools per second, hide after 4s
   useEffect(() => {
     setIsVisible(true);
     if (onVisibilityChange) {
       onVisibilityChange(true);
     }
-    setAutoIndex(0);
 
-    const TOOL_INTERVAL_MS = 500; // 2 tools per second
-    const TOTAL_DURATION_MS = 4000; // show for 4 seconds
+    // Update stage every 600ms
+    const stageInterval = setInterval(() => {
+      setStageIndex(prev => (prev + 1) % stages.length);
+    }, 600);
 
-    const interval = setInterval(() => {
-      setAutoIndex((prev) => prev + 1);
-    }, TOOL_INTERVAL_MS);
+    // Animate progress from 0 to 100 over 3 seconds
+    const progressInterval = setInterval(() => {
+      setProgress(prev => {
+        const next = prev + Math.random() * 25;
+        return next > 100 ? 100 : next;
+      });
+    }, 250);
 
+    // Hide the loading screen after 3 seconds
     const hideTimer = setTimeout(() => {
-      setIsVisible(false);
-      if (onVisibilityChange) {
-        onVisibilityChange(false);
-      }
-      clearInterval(interval);
-    }, TOTAL_DURATION_MS);
+      setProgress(100);
+      setStageIndex(stages.length - 1);
+      setTimeout(() => {
+        setIsVisible(false);
+        if (onVisibilityChange) {
+          onVisibilityChange(false);
+        }
+      }, 200);
+    }, 3000);
 
     return () => {
-      clearInterval(interval);
+      clearInterval(stageInterval);
+      clearInterval(progressInterval);
       clearTimeout(hideTimer);
     };
   }, [onVisibilityChange]);
-
-  // Get current tool
-  const currentToolIndex = Math.min(autoIndex, tools.length - 1);
-  const currentTool = tools[currentToolIndex];
-  const toolProgress = autoIndex % 1; // For animation transitions
 
   return (
     <div className={`fixed inset-0 z-50 transition-opacity duration-500 ${
@@ -55,45 +59,116 @@ export default function LoadScreen({ onVisibilityChange }) {
         ? 'opacity-100' 
         : 'opacity-0 pointer-events-none'
     }`}>
-      {/* Gradient Background */}
-      <div className="absolute inset-0 bg-linear-to-b from-slate-900 via-purple-950 to-slate-900" />
+      {/* Light gradient background with grid */}
+      <div className={`absolute inset-0 overflow-hidden ${
+        isDark 
+          ? 'bg-gradient-to-b from-black via-slate-900 to-black'
+          : 'bg-white'
+      }`}>
+        {/* Animated grid background */}
+        <div className="absolute inset-0 opacity-20" style={{
+          backgroundImage: isDark
+            ? 'linear-gradient(0deg, transparent 24%, rgba(251, 191, 36, 0.1) 25%, rgba(251, 191, 36, 0.1) 26%, transparent 27%, transparent 74%, rgba(251, 191, 36, 0.1) 75%, rgba(251, 191, 36, 0.1) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(251, 191, 36, 0.1) 25%, rgba(251, 191, 36, 0.1) 26%, transparent 27%, transparent 74%, rgba(251, 191, 36, 0.1) 75%, rgba(251, 191, 36, 0.1) 76%, transparent 77%, transparent)'
+            : 'linear-gradient(0deg, transparent 24%, rgba(100, 116, 139, 0.15) 25%, rgba(100, 116, 139, 0.15) 26%, transparent 27%, transparent 74%, rgba(100, 116, 139, 0.15) 75%, rgba(100, 116, 139, 0.15) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(100, 116, 139, 0.15) 25%, rgba(100, 116, 139, 0.15) 26%, transparent 27%, transparent 74%, rgba(100, 116, 139, 0.15) 75%, rgba(100, 116, 139, 0.15) 76%, transparent 77%, transparent)',
+          backgroundSize: '100px 100px',
+        }} />
+        
+        {/* Floating orbs */}
+        <div className={`absolute top-20 right-20 w-64 h-64 rounded-full blur-3xl animate-pulse ${isDark ? 'bg-[#B85252]/15' : 'bg-[#64748b]/10'}`}></div>
+        <div className={`absolute bottom-20 left-20 w-64 h-64 rounded-full blur-3xl animate-pulse ${isDark ? 'bg-[#F58840]/15' : 'bg-[#64748b]/10'}`} style={{ animationDelay: '1s' }}></div>
+      </div>
 
-      {/* Loading Content */}
+      {/* Content */}
       <div className="absolute inset-0 flex flex-col items-center justify-center px-6">
-        {/* Tool Icon */}
-        <div className={`mb-6 lg:mb-8 transition-all duration-500 transform ${toolProgress < 0.5 ? 'scale-100 opacity-100' : 'scale-150 opacity-0'}`}>
-          <div className={`w-32 h-32 lg:w-40 lg:h-40 rounded-full bg-linear-to-br ${currentTool.color} p-6 lg:p-8 flex items-center justify-center shadow-2xl shadow-purple-900/50 animate-pulse`}>
-            <img 
-              src={currentTool.icon} 
-              alt={currentTool.name}
-              className="w-24 h-24 lg:w-44 lg:h-44 object-contain drop-shadow-lg"
-            />
+        <div className="w-full max-w-2xl text-center">
+          {/* Main circular progress */}
+          <div className="mb-12 flex justify-center">
+            <div className="relative w-32 h-32">
+              {/* Outer rotating ring */}
+              <div className={`absolute inset-0 rounded-full border-4 border-transparent animate-spin ${isDark ? 'border-t-[#F58840] border-r-[#B85252]' : 'border-t-[#64748b] border-r-[#64748b]'}`} style={{ animationDuration: '2s' }}></div>
+              
+              {/* Inner pulsing ring */}
+              <div className={`absolute inset-4 rounded-full border-2 animate-pulse ${isDark ? 'border-[#F58840]/40' : 'border-[#64748b]/30'}`}></div>
+              
+              {/* Center progress text with emoji */}
+              <div className="absolute inset-0 flex flex-col items-center justify-center">
+                <div className="text-4xl mb-2 animate-bounce">{stages[stageIndex].icon}</div>
+                <div className={`text-2xl font-mono font-bold ${isDark ? 'text-[#F58840]' : 'text-[#64748b]'}`}>{Math.round(progress)}%</div>
+              </div>
+            </div>
+          </div>
+
+          {/* DevOps Pipeline Stages */}
+          <div className="mb-12 flex justify-between items-center gap-1 px-2">
+            {stages.map((s, index) => (
+              <React.Fragment key={index}>
+                <div className={`flex-1 py-2 px-2 rounded-lg flex flex-col items-center justify-center text-xs font-mono transition-all duration-300 ${
+                  index < stageIndex
+                    ? isDark 
+                      ? 'bg-[#F58840]/40 border border-[#B85252] text-white shadow-lg shadow-[#B85252]/30'
+                      : 'bg-[#64748b]/20 border border-[#64748b]/40 text-[#64748b] shadow-lg shadow-[#64748b]/20'
+                    : index === stageIndex
+                    ? isDark
+                      ? 'bg-gradient-to-r from-[#F58840] to-[#B85252] border border-[#B85252] text-white shadow-lg shadow-[#B85252]/50 scale-105'
+                      : 'bg-gradient-to-r from-[#64748b] to-[#64748b] border border-[#64748b]/60 text-white shadow-lg shadow-[#64748b]/40 scale-105'
+                    : isDark
+                    ? 'bg-slate-800/30 border border-slate-700/30 text-gray-500'
+                    : 'bg-white/80 border border-[#64748b]/20 text-[#64748b]'
+                }`}>
+                  <span className="text-lg mb-1">{s.icon}</span>
+                  <span className="font-semibold text-center leading-tight">{s.title}</span>
+                </div>
+                {index < stages.length - 1 && (
+                  <div className={`h-1 flex-1 transition-all duration-300 ${
+                    index < stageIndex 
+                      ? isDark ? 'bg-[#B85252]' : 'bg-[#64748b]'
+                      : isDark ? 'bg-slate-700/30' : 'bg-[#64748b]/40'
+                  }`}></div>
+                )}
+              </React.Fragment>
+            ))}
+          </div>
+
+          {/* DevOps Stage Description */}
+          <div className="mb-8">
+            <h2 className={`text-2xl font-mono font-bold mb-2 transition-all duration-300 ${isDark ? 'text-white' : 'text-[#64748b]'}`}>{stages[stageIndex].title}</h2>
+            <p className={`font-mono text-sm h-6 transition-all duration-300 ${isDark ? 'text-[#F58840]' : 'text-[#64748b]'}`}>
+              {stages[stageIndex].description}
+            </p>
+          </div>
+
+          {/* Progress bar */}
+          <div className="mb-8">
+            <div className={`h-2 rounded-full overflow-hidden border ${isDark ? 'bg-slate-800/50 border-yellow-600/40' : 'bg-white border-[#64748b]/30'}`}>
+              <div 
+                className={`h-full transition-all duration-300 rounded-full shadow-lg ${isDark ? 'bg-gradient-to-r from-[#F58840] via-[#B85252] to-[#B85252] shadow-[#B85252]/50' : 'bg-gradient-to-r from-[#64748b] to-[#64748b] shadow-[#64748b]/40'}`}
+                style={{ width: `${progress}%` }}
+              ></div>
+            </div>
+          </div>
+
+          {/* Status dots */}
+          <div className="flex justify-center gap-2">
+            {[0, 1, 2].map(i => (
+              <div
+                key={i}
+                className={`w-2 h-2 rounded-full ${isDark ? 'bg-[#F58840]' : 'bg-[#64748b]'}`}
+                style={{
+                  animation: 'pulse 1.4s infinite',
+                  animationDelay: `${i * 0.3}s`,
+                }}
+              ></div>
+            ))}
           </div>
         </div>
-
-        {/* Tool Name */}
-        <h2 className="text-3xl lg:text-5xl font-poppins font-bold text-white mb-3 lg:mb-4 text-center transition-all duration-500 px-4">
-          {currentTool.name}
-        </h2>
-
-        {/* Progress Bar */}
-        <div className="w-56 lg:w-64 h-1 bg-gray-700/30 rounded-full overflow-hidden mb-6 lg:mb-8">
-          <div 
-            className="h-full bg-linear-to-r from-purple-600 to-purple-400 transition-all duration-300"
-            style={{ width: `${(currentToolIndex / tools.length) * 100}%` }}
-          />
-        </div>
-
-        {/* Tool Counter */}
-        <p className="text-gray-400 text-xs lg:text-sm font-light">
-          Showcasing DevOps Tools • {currentToolIndex + 1} / {tools.length}
-        </p>
-
-        {/* Progress Percentage */}
-        <div className="absolute top-8 right-8 text-gray-400">
-          <p className="text-sm font-light">{Math.round((currentToolIndex / tools.length) * 100)}%</p>
-        </div>
       </div>
+
+      <style>{`
+        @keyframes pulse {
+          0%, 100% { opacity: 0.3; }
+          50% { opacity: 1; }
+        }
+      `}</style>
     </div>
   );
 }
