@@ -1,12 +1,33 @@
 import React, { useState, useContext } from 'react';
 import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { ThemeContext } from '../context/ThemeContext';
+import { socialLinks } from '../config/socialLinks';
 
 export default function Skills() {
   const { isDark, dark, light } = useContext(ThemeContext);
   const currentTheme = isDark ? dark : light;
   
   const [hoveredSkill, setHoveredSkill] = useState(null);
+
+  // Level color configuration for both themes - Modern & Vibrant with animations
+  const getLevelStyles = (level) => {
+    const levelColors = {
+      'Advanced': {
+        dark: 'bg-gradient-to-r from-emerald-500/30 to-teal-500/30 text-emerald-300 border border-emerald-400/50 animate-pulse-subtle',
+        light: 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white border border-emerald-400 animate-pulse-subtle'
+      },
+      'Intermediate': {
+        dark: 'bg-gradient-to-r from-orange-500/30 to-amber-500/30 text-orange-300 border border-orange-400/50 animate-pulse-subtle',
+        light: 'bg-gradient-to-r from-orange-500 to-amber-500 text-white border border-orange-400 animate-pulse-subtle'
+      },
+      'Beginner': {
+        dark: 'bg-gradient-to-r from-violet-500/30 to-purple-500/30 text-violet-300 border border-violet-400/50 animate-pulse-subtle',
+        light: 'bg-gradient-to-r from-violet-500 to-purple-500 text-white border border-violet-400 animate-pulse-subtle'
+      }
+    };
+    return levelColors[level]?.[isDark ? 'dark' : 'light'] || levelColors['Beginner'][isDark ? 'dark' : 'light'];
+  };
 
   // Generate random stars for background
   const stars = Array.from({ length: 50 }, (_, i) => ({
@@ -36,7 +57,7 @@ export default function Skills() {
       icon: '/logo/Kubernetes-Logo.wine.png', 
       color: ' to-blue-900',
       description: 'Orchestration',
-      level: 'Intermediate'
+      level: 'Advanced'
     },
     { 
       name: 'AWS', 
@@ -50,6 +71,13 @@ export default function Skills() {
       icon: '/logo/computer-illustration-linux-tux-as-logo-illustration-isolated-white-background-tux-penguin-character-258590115-Photoroom.png', 
       color: ' to-orange-900',
       description: 'Operating System',
+      level: 'Advanced'
+    },
+    { 
+      name: 'Jenkins', 
+      icon: '/logo/jenkins.svg', 
+      color: 'to-white',
+      description: 'CI/CD Automation',
       level: 'Advanced'
     },
     { 
@@ -85,7 +113,7 @@ export default function Skills() {
       icon: '/logo/spring-boot-logo-icon.webp', 
       color: ' to-green-900',
       description: 'Backend Framework',
-      level: 'Advanced'
+      level: 'Intermediate'
     },
     { 
       name: 'Node.js', 
@@ -182,9 +210,9 @@ export default function Skills() {
                   <h3 className={`text-lg font-mono font-bold mb-2 ${currentTheme.textWhite}`}>{skill.name}</h3>
                   <p className={`text-sm mb-4 leading-relaxed ${currentTheme.textGrayMuted}`}>{skill.description}</p>
                   
-                  {/* Level Badge with enhanced styling */}
+                  {/* Level Badge with color-coded styling */}
                   <div className={`flex items-center justify-between pt-3 border-t ${currentTheme.borderLighter}`}>
-                    <span className={`text-xs font-semibold px-3 py-1.5 rounded-full transition-all duration-300 ${currentTheme.badgeBg} ${currentTheme.badgeText}`}>
+                    <span className={`text-xs font-semibold px-3 py-1.5 rounded-full transition-all duration-300 hover:scale-110 hover:-translate-y-0.5 cursor-default ${getLevelStyles(skill.level)}`}>
                       {skill.level}
                     </span>
                     <ArrowRight size={16} className={`${currentTheme.accent} group-hover:translate-x-2 transition-all duration-300 opacity-0 group-hover:opacity-100`} />
@@ -197,12 +225,28 @@ export default function Skills() {
 
         {/* Footer */}
         <div className={`border-t ${currentTheme.borderLighter}`}>
-          <div className="max-w-7xl mx-auto px-6 py-8">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-              <p className={`text-sm ${currentTheme.textGrayMuted}`}>© 2026 Shashmitha Banadara. All rights reserved.</p>
-              <div className="flex gap-6">
-                <a href="#" className={`transition-colors text-sm ${currentTheme.textGrayMuted} ${currentTheme.accentHover}`}>About</a>
-                <a href="#" className={`transition-colors text-sm ${currentTheme.textGrayMuted} ${currentTheme.accentHover}`}>Contact</a>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
+              <p className={`text-xs sm:text-sm ${currentTheme.textGrayMuted}`}>© 2026 Shashmitha Banadara. All rights reserved.</p>
+              
+              {/* Social Links */}
+              <div className="flex gap-2 sm:gap-4">
+                {socialLinks.map((social, index) => (
+                  <a 
+                    key={index}
+                    href={social.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className={`p-1.5 sm:p-2 rounded-full border transition-all duration-300 hover:scale-110 ${currentTheme.borderLight} ${currentTheme.cardBorderHover}`}
+                  >
+                    <social.icon className={`w-4 h-4 sm:w-[18px] sm:h-[18px] ${currentTheme.accentHover}`} />
+                  </a>
+                ))}
+              </div>
+
+              <div className="flex gap-4 sm:gap-6">
+                <Link to="/about" className={`transition-colors text-xs sm:text-sm ${currentTheme.textGrayMuted} ${currentTheme.accentHover}`}>About</Link>
+                <Link to="/connect" className={`transition-colors text-xs sm:text-sm ${currentTheme.textGrayMuted} ${currentTheme.accentHover}`}>Contact</Link>
               </div>
             </div>
           </div>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="devopsGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F58840;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#B85252;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- Background circle with border for visibility on both themes -->
+  <circle cx="50" cy="50" r="48" fill="url(#devopsGrad)"/>
+  <circle cx="50" cy="50" r="46" fill="none" stroke="white" stroke-width="2" opacity="0.3"/>
+  <!-- Infinity symbol representing DevOps continuous loop -->
+  <path d="M25 50 C25 38, 38 38, 50 50 C62 62, 75 62, 75 50 C75 38, 62 38, 50 50 C38 62, 25 62, 25 50" 
+        fill="none" 
+        stroke="white" 
+        stroke-width="7" 
+        stroke-linecap="round"/>
+  <!-- Gear teeth around the infinity - representing automation/ops -->
+  <g fill="white" opacity="0.9">
+    <rect x="48" y="12" width="4" height="10" rx="2"/>
+    <rect x="48" y="78" width="4" height="10" rx="2"/>
+    <rect x="12" y="48" width="10" height="4" rx="2"/>
+    <rect x="78" y="48" width="10" height="4" rx="2"/>
+    <rect x="22" y="22" width="4" height="8" rx="2" transform="rotate(45 24 26)"/>
+    <rect x="74" y="22" width="4" height="8" rx="2" transform="rotate(-45 76 26)"/>
+    <rect x="22" y="70" width="4" height="8" rx="2" transform="rotate(-45 24 74)"/>
+    <rect x="74" y="70" width="4" height="8" rx="2" transform="rotate(45 76 74)"/>
+  </g>
+</svg>

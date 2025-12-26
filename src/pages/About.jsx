@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import { Mail, Github, Linkedin, Instagram } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { ThemeContext } from '../context/ThemeContext';
+import { socialLinks } from '../config/socialLinks';
 
 export default function About() {
   const { isDark, dark, light } = useContext(ThemeContext);
@@ -176,22 +178,32 @@ export default function About() {
           </div>
         </div>
 
-        {/* Social Links */}
-        <div className={`text-center pt-12 border-t ${currentTheme.borderLighter}`}>
-          <p className={`mb-6 ${currentTheme.textGrayMuted}`}>Let's connect and collaborate!</p>
-          <div className="flex justify-center gap-6">
-            <a href="#" className={`p-4 rounded-full transition-all duration-300 hover:-translate-y-2 group ${currentTheme.accentBgLight} ${currentTheme.bgCardHover}`}>
-              <Mail size={24} className={`${currentTheme.accent}`} />
-            </a>
-            <a href="#" className={`p-4 rounded-full transition-all duration-300 hover:-translate-y-2 group ${currentTheme.accentBgLight} ${currentTheme.bgCardHover}`}>
-              <Github size={24} className={`${currentTheme.accent}`} />
-            </a>
-            <a href="#" className={`p-4 rounded-full transition-all duration-300 hover:-translate-y-2 group ${currentTheme.accentBgLight} ${currentTheme.bgCardHover}`}>
-              <Linkedin size={24} className={`${currentTheme.accent}`} />
-            </a>
-            <a href="#" className={`p-4 rounded-full transition-all duration-300 hover:-translate-y-2 group ${currentTheme.accentBgLight} ${currentTheme.bgCardHover}`}>
-              <Instagram size={24} className={`${currentTheme.accent}`} />
-            </a>
+        {/* Footer */}
+        <div className={`border-t ${currentTheme.borderLighter} mt-12`}>
+          <div className="max-w-7xl mx-auto px-6 py-8">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+              <p className={`text-sm ${currentTheme.textGrayMuted}`}>© 2026 Shashmitha Banadara. All rights reserved.</p>
+              
+              {/* Social Links */}
+              <div className="flex gap-4">
+                {socialLinks.map((social, index) => (
+                  <a 
+                    key={index}
+                    href={social.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className={`p-2 rounded-full border transition-all duration-300 hover:scale-110 ${currentTheme.borderLight} ${currentTheme.cardBorderHover}`}
+                  >
+                    <social.icon size={18} className={currentTheme.accentHover} />
+                  </a>
+                ))}
+              </div>
+
+              <div className="flex gap-6">
+                <Link to="/skills" className={`transition-colors text-sm ${currentTheme.textGrayMuted} ${currentTheme.accentHover}`}>Skills</Link>
+                <Link to="/connect" className={`transition-colors text-sm ${currentTheme.textGrayMuted} ${currentTheme.accentHover}`}>Contact</Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>

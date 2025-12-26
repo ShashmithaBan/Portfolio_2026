@@ -1,6 +1,8 @@
 import React, { useState, useContext, useRef, useEffect } from 'react';
-import { Mail, Github, Linkedin, Instagram, Send, CheckCircle, AlertCircle, Sparkles, X, PartyPopper } from 'lucide-react';
+import { Mail, Github, Linkedin, Instagram, Send, CheckCircle, AlertCircle, Sparkles, X, PartyPopper, BookOpen } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { ThemeContext } from '../context/ThemeContext';
+import { socialLinks } from '../config/socialLinks';
 import emailjs from '@emailjs/browser';
 
 export default function Connect() {
@@ -203,12 +205,8 @@ export default function Connect() {
     }
   };
 
-  const socials = [
-    { icon: Mail, label: 'Email', value: 'shashmitha@example.com', link: 'mailto:shashmitha@example.com', color: 'from-red-600 to-pink-600' },
-    { icon: Github, label: 'GitHub', value: '@ShashmithaBan', link: 'https://github.com/ShashmithaBan', color: 'from-gray-700 to-gray-900' },
-    { icon: Linkedin, label: 'LinkedIn', value: 'LinkedIn Profile', link: 'https://linkedin.com', color: 'from-blue-600 to-blue-800' },
-    { icon: Instagram, label: 'Instagram', value: '@shashmitha.design', link: 'https://instagram.com', color: 'from-pink-600 to-yellow-600' }
-  ];
+  // Use centralized social links
+  const socials = socialLinks;
 
   return (
     <div className={`min-h-screen bg-gradient-to-br ${currentTheme.bg} pt-6 sm:pt-8 lg:pt-16 pb-24 sm:pb-32 lg:pb-12 ${currentTheme.text} relative overflow-hidden`}>
@@ -489,9 +487,25 @@ export default function Connect() {
           <div className="max-w-7xl mx-auto px-6 py-8">
             <div className="flex flex-col md:flex-row items-center justify-between gap-6">
               <p className={`text-sm ${currentTheme.textGrayMuted}`}>© 2026 Shashmitha Banadara. All rights reserved.</p>
+              
+              {/* Social Links */}
+              <div className="flex gap-4">
+                {socialLinks.map((social, index) => (
+                  <a 
+                    key={index}
+                    href={social.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className={`p-2 rounded-full border transition-all duration-300 hover:scale-110 ${currentTheme.borderLight} ${currentTheme.cardBorderHover}`}
+                  >
+                    <social.icon size={18} className={currentTheme.accentHover} />
+                  </a>
+                ))}
+              </div>
+
               <div className="flex gap-6">
-                <a href="#" className={`transition-colors text-sm ${currentTheme.textGrayMuted} ${currentTheme.accentHover}`}>About</a>
-                <a href="#" className={`transition-colors text-sm ${currentTheme.textGrayMuted} ${currentTheme.accentHover}`}>Contact</a>
+                <Link to="/about" className={`transition-colors text-sm ${currentTheme.textGrayMuted} ${currentTheme.accentHover}`}>About</Link>
+                <Link to="/skills" className={`transition-colors text-sm ${currentTheme.textGrayMuted} ${currentTheme.accentHover}`}>Skills</Link>
               </div>
             </div>
           </div>

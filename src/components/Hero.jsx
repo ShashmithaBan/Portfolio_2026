@@ -1,13 +1,19 @@
 import React, { useContext } from 'react';
-import { Mail, Github, Linkedin, Instagram, ChevronDown } from 'lucide-react';
+import { Mail, Github, Linkedin, Instagram, ChevronDown, BookOpen } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ThemeContext } from '../context/ThemeContext';
 import ExperienceSlider from './ExperienceSlider';
 import AnimatedTitle from './AnimatedTitle';
+import { quickLinks, whatsappConfig } from '../config/socialLinks';
 
 export default function Hero() {
   const { isDark, dark, light } = useContext(ThemeContext);
   const currentTheme = isDark ? dark : light;
+
+  // Handle Hire Me button - opens WhatsApp with pre-filled message
+  const handleHireMe = () => {
+    window.open(whatsappConfig.getLink(), '_blank');
+  };
 
   // Generate random stars
   const stars = Array.from({ length: 50 }, (_, i) => ({
@@ -43,6 +49,15 @@ export default function Hero() {
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-1 items-center relative z-10 w-full">
         {/* Left Content - Order 1 on mobile, Order 1 on desktop */}
         <div className="space-y-6 sm:space-y-8 order-1">
+          {/* Internship Seeking Badge - Minimal */}
+          <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium border backdrop-blur-sm transition-all duration-500 hover:scale-105 hover:shadow-lg animate-float-subtle ${isDark ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/20 hover:shadow-emerald-500/20' : 'bg-emerald-50 border-emerald-300 text-emerald-600 hover:bg-emerald-100 hover:shadow-emerald-300/30'}`}>
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            Open to Hire
+          </div>
+
           {/* Main Title */}
           <div className="space-y-2">
             <p className={`text-sm sm:text-base lg:text-lg font-sans font-medium tracking-wide ${currentTheme.accent}`}>Hey, I'm <span className={`font-semibold ${currentTheme.text}`}>Shashmitha Bandara</span></p>
@@ -54,26 +69,37 @@ export default function Hero() {
 
           {/* CTA Buttons */}
           <div className="flex flex-wrap gap-3 sm:gap-6 items-center pt-2">
-            <button className={`px-6 sm:px-8 py-2 sm:py-3 text-sm sm:text-base rounded-full font-mono font-semibold transition transform hover:scale-105 tracking-wide shadow-lg ${currentTheme.accentBg} ${currentTheme.bgButtonHover} ${isDark ? 'text-black' : 'text-white'} ${currentTheme.shadow}`}>
+            <button 
+              onClick={handleHireMe}
+              className={`px-6 sm:px-8 py-2 sm:py-3 text-sm sm:text-base rounded-full font-mono font-semibold transition transform hover:scale-105 tracking-wide shadow-lg ${currentTheme.accentBg} ${currentTheme.bgButtonHover} ${isDark ? 'text-black' : 'text-white'} ${currentTheme.shadow}`}
+            >
               Hire me
             </button>
-            <a href='https://www.instagram.com/shashmitha_001/'>
-            <button className={`p-3 border rounded-full transition transform hover:scale-105 ${currentTheme.borderLight} ${currentTheme.cardBorderHover}`} linked="https://www.instagram.com/shashmitha_001/">
-              <Instagram size={20} className={currentTheme.accentHover} />
-             
-            </button></a>
-             <a href='https://github.com/ShashmithaBan'>
-            <button className={`p-3 border rounded-full transition transform hover:scale-105 ${currentTheme.borderLight} ${currentTheme.cardBorderHover}`} linked="https://github.com/ShashmithaBan">
-              <Github size={20} className={currentTheme.accentHover} />
-            </button></a>
-             <a href='https://www.linkedin.com/in/shashmitha-bandara-90180225a/'>
-            <button className={`p-3 border rounded-full transition transform hover:scale-105 ${currentTheme.borderLight} ${currentTheme.cardBorderHover}`} linked="https://www.linkedin.com/in/shashmitha-bandara-90180225a/">
-              <Linkedin size={20} className={currentTheme.accentHover} />
-            </button></a>
-             <a href='mailto:gimansabandara2001@gmail.com"'>
-            <button className={`p-3 border rounded-full transition transform hover:scale-105 ${currentTheme.borderLight} ${currentTheme.cardBorderHover}`} linked="mailto:gimansabandara2001@gmail.com">
-              <Mail size={20} className={currentTheme.accentHover} />
-            </button></a>
+            <a href={quickLinks.instagram} target="_blank" rel="noopener noreferrer">
+              <button className={`p-3 border rounded-full transition transform hover:scale-105 ${currentTheme.borderLight} ${currentTheme.cardBorderHover}`}>
+                <Instagram size={20} className={currentTheme.accentHover} />
+              </button>
+            </a>
+            <a href={quickLinks.github} target="_blank" rel="noopener noreferrer">
+              <button className={`p-3 border rounded-full transition transform hover:scale-105 ${currentTheme.borderLight} ${currentTheme.cardBorderHover}`}>
+                <Github size={20} className={currentTheme.accentHover} />
+              </button>
+            </a>
+            <a href={quickLinks.linkedin} target="_blank" rel="noopener noreferrer">
+              <button className={`p-3 border rounded-full transition transform hover:scale-105 ${currentTheme.borderLight} ${currentTheme.cardBorderHover}`}>
+                <Linkedin size={20} className={currentTheme.accentHover} />
+              </button>
+            </a>
+            <a href={quickLinks.medium} target="_blank" rel="noopener noreferrer">
+              <button className={`p-3 border rounded-full transition transform hover:scale-105 ${currentTheme.borderLight} ${currentTheme.cardBorderHover}`}>
+                <BookOpen size={20} className={currentTheme.accentHover} />
+              </button>
+            </a>
+            <a href={quickLinks.email}>
+              <button className={`p-3 border rounded-full transition transform hover:scale-105 ${currentTheme.borderLight} ${currentTheme.cardBorderHover}`}>
+                <Mail size={20} className={currentTheme.accentHover} />
+              </button>
+            </a>
           </div>
 
           {/* Experience Slider */}

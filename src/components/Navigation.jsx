@@ -72,11 +72,11 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
     return (
         <>
             {/* Desktop Navigation - Shows on large screens (1280px+) */}
-            <header className={`hidden xl:block fixed top-0 left-0 right-0 z-50 backdrop-blur-md ${isDark ? 'bg-black/30' : 'bg-white/80'}`}>
+            <header className={`hidden xl:block fixed top-0 left-0 right-0 z-50 backdrop-blur-md ${isDark ? 'bg-black/10' : 'bg-white/10'}`}>
                 <div className="mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
                     {/* Logo */}
                     <Link to="/" className={`text-xl md:text-2xl font-bold min-w-fit z-10 hover:opacity-80 transition-opacity`}>
-                        <span className={`font-sans font-semibold ${currentTheme.text}`}>Shashmitha</span>
+                        <span className={`${currentTheme.text}`} style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, letterSpacing: '-0.5px' }}>Shashmitha</span>
                         <span className={isDark ? 'text-yellow-600' : 'text-[#64748b]'}> .</span>
                     </Link>
 
@@ -114,7 +114,7 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
                         <button 
                             onClick={handleDownload}
                             disabled={isDownloading}
-                            className={`relative flex items-center gap-2 px-4 py-2 border rounded-full backdrop-blur-sm transition-all duration-300 text-sm tracking-wide whitespace-nowrap transform font-sans overflow-hidden ${currentTheme.border} ${!isDownloading ? currentTheme.buttonHover : ''} ${!isDownloading && (isDark ? 'hover:text-black' : 'hover:text-white')} ${!isDownloading ? 'hover:scale-110' : ''} shadow-lg ${currentTheme.shadowLighter} ${currentTheme.shadow} ${!isDownloading ? 'hover:font-bold' : ''}`}
+                            className={`group relative flex items-center gap-2 px-4 py-2 border rounded-full backdrop-blur-sm transition-all duration-300 text-sm tracking-wide whitespace-nowrap transform font-sans overflow-hidden ${currentTheme.border} ${!isDownloading ? currentTheme.buttonHover : ''} ${!isDownloading ? 'hover:scale-110' : ''} shadow-lg ${currentTheme.shadowLighter} ${currentTheme.shadow} ${!isDownloading ? 'hover:font-bold' : ''}`}
                         >
                             {/* Green Liquid Fill Animation */}
                             <div 
@@ -137,8 +137,8 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
                                 )}
                             </div>
                             
-                            {/* Black text layer (background) */}
-                            <span className={`relative z-10 flex items-center gap-2 text-black font-semibold`}>
+                            {/* Text layer (background) - theme aware, turns white on hover */}
+                            <span className={`relative z-10 flex items-center gap-2 font-medium transition-colors duration-300 ${isDownloading ? 'text-black' : `${currentTheme.text} group-hover:text-white`}`}>
                                 {downloadComplete ? (
                                     <Check className="w-4 h-4" />
                                 ) : isDownloading ? (
@@ -153,7 +153,7 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
                             
                             {/* White text layer (revealed by liquid) */}
                             <span 
-                                className="absolute inset-0 z-20 flex items-center justify-center gap-2 text-white font-semibold px-4 py-2"
+                                className="absolute inset-0 z-20 flex items-center justify-center gap-2 text-white font-medium px-4 py-2"
                                 style={{ 
                                     clipPath: `inset(0 ${100 - downloadProgress}% 0 0)`
                                 }}
@@ -179,7 +179,7 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
                 <div className="w-full px-6 py-4 flex justify-between items-center">
                     {/* Logo */}
                     <Link to="/" className="text-xl font-bold hover:opacity-80 transition-opacity">
-                        <span className={`font-sans font-semibold ${currentTheme.text}`}>Shashmitha</span>
+                        <span className={`${currentTheme.text}`} style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, letterSpacing: '-0.5px' }}>Shashmitha</span>
                         <span className={isDark ? 'text-yellow-600' : 'text-[#64748b]'}> .</span>
                     </Link>
 
@@ -267,7 +267,7 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
             <div className={`md:hidden fixed top-0 left-0 right-0 z-50 px-4 py-3 flex justify-between items-center backdrop-blur-md ${isDark ? 'bg-black/30' : 'bg-white/80'}`}>
                 {/* Logo */}
                 <Link to="/" className="text-lg font-bold">
-                    <span className={`font-sans font-semibold ${currentTheme.text}`}>Shashmitha</span>
+                    <span className={`${currentTheme.text}`} style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, letterSpacing: '-0.5px' }}>Shashmitha</span>
                     <span className={isDark ? 'text-yellow-600' : 'text-[#64748b]'}> .</span>
                 </Link>
                 

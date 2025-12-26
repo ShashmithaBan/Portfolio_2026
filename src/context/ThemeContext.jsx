@@ -7,18 +7,34 @@ export const ThemeProvider = ({ children }) => {
     const saved = localStorage.getItem('theme');
     return saved ? saved === 'dark' : false;
   });
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [transitionDirection, setTransitionDirection] = useState(null); // 'toNight' or 'toDay'
 
   useEffect(() => {
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
   }, [isDark]);
 
   const toggleTheme = () => {
-    setIsDark(!isDark);
+    setTransitionDirection(isDark ? 'toDay' : 'toNight');
+    setIsTransitioning(true);
+    
+    // Change theme at the peak of the animation
+    setTimeout(() => {
+      setIsDark(!isDark);
+    }, 400);
+    
+    // End transition after animation completes
+    setTimeout(() => {
+      setIsTransitioning(false);
+      setTransitionDirection(null);
+    }, 800);
   };
 
   const theme = {
     isDark,
     toggleTheme,
+    isTransitioning,
+    transitionDirection,
     // Dark Theme Colors (#000000, #F58840, #B85252, #EADEDE)
     dark: {
       bg: 'from-[#000000] via-[#0a0a0a] to-[#000000]',
@@ -112,7 +128,7 @@ export const ThemeProvider = ({ children }) => {
   };
 
   return (
-    <ThemeContext.Provider value={{ isDark, toggleTheme, ...theme }}>
+    <ThemeContext.Provider value={{ isDark, toggleTheme, isTransitioning, transitionDirection, ...theme }}>
       {children}
     </ThemeContext.Provider>
   );
