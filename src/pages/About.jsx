@@ -70,7 +70,7 @@ export default function About() {
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Profile Section */}
-        <div className="text-center mb-12 sm:mb-14 lg:mb-16">
+        <div className="text-center mb-12 sm:mb-14 lg:mb-16 animate-fadeInUp">
           <div className="flex justify-center mb-8">
             <div className={`w-48 h-48 lg:w-64 lg:h-64 rounded-full border-4 p-2 bg-linear-to-br transition-all duration-500 hover:shadow-2xl ${currentTheme.cardBorder} ${currentTheme.accentBgLight} ${currentTheme.cardBorderHover} ${currentTheme.shadow}`}>
               <div className="w-full h-full rounded-full overflow-hidden bg-gray-800 flex items-center justify-center">
@@ -83,15 +83,15 @@ export default function About() {
             </div>
           </div>
 
-          <h1 className={`text-5xl lg:text-6xl font-mono font-bold mb-4 ${currentTheme.textWhite}`}>
+          <h1 className={`text-5xl lg:text-6xl font-mono font-bold mb-4 ${currentTheme.textWhite} animate-fadeInUp`} style={{ animationDelay: '0.1s' }}>
             Hi, I'm <span className={`bg-linear-to-r bg-clip-text text-transparent ${currentTheme.gradient}`}>Shashmitha</span>
           </h1>
 
-          <p className={`text-xl font-mono font-semibold mb-6 ${currentTheme.textSecondary}`}>
+          <p className={`text-xl font-mono font-semibold mb-6 ${currentTheme.textSecondary} animate-fadeInUp`} style={{ animationDelay: '0.2s' }}>
             Final Year Undergraduate | DevOps Enthusiast | Full Stack Developer
           </p>
 
-          <div className={`max-w-3xl mx-auto space-y-6 leading-relaxed ${currentTheme.textGray}`}>
+          <div className={`max-w-3xl mx-auto space-y-6 leading-relaxed ${currentTheme.textGray} animate-fadeInUp`} style={{ animationDelay: '0.3s' }}>
             <p className="text-base lg:text-lg">
               Passionate Software Engineering Undergraduate at the <span className={`font-semibold ${currentTheme.accent}`}>University of Kelaniya, Sri Lanka</span>, with a strong enthusiasm for DevOps and modern cloud technologies.
             </p>
@@ -148,7 +148,7 @@ export default function About() {
         </div> */}
 
         {/* Achievements Section */}
-        <div className="mb-20">
+        <div className="mb-20 animate-fadeInUp" style={{ animationDelay: '0.4s' }}>
           <h2 className={`text-4xl font-mono font-bold mb-12 text-center ${currentTheme.textWhite}`}>
             Leadership & <span className={currentTheme.gradientText}>Achievements</span>
           </h2>
@@ -157,7 +157,8 @@ export default function About() {
             {achievements.map((achievement, index) => (
               <div
                 key={index}
-                className={`p-6 backdrop-blur-sm rounded-2xl transition-all duration-500 hover:-translate-y-1 ${currentTheme.bgCard} ${currentTheme.cardBorder} ${currentTheme.cardBorderHover} ${currentTheme.bgCardHover}`}
+                className={`p-6 backdrop-blur-sm rounded-2xl transition-all duration-500 hover:-translate-y-1 hover:scale-[1.02] animate-slideInLeft ${currentTheme.bgCard} ${currentTheme.cardBorder} ${currentTheme.cardBorderHover} ${currentTheme.bgCardHover}`}
+                style={{ animationDelay: `${0.5 + index * 0.1}s` }}
               >
                 <div className="flex items-start gap-4">
                   <div className={`flex-shrink-0 w-3 h-3 mt-2 rounded-full ${currentTheme.dotBg}`} />

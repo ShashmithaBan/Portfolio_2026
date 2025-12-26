@@ -245,8 +245,8 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
                                     />
                                 )}
                             </div>
-                            {/* Black icon layer */}
-                            <span className="relative z-10 text-black">
+                            {/* Icon layer - theme aware */}
+                            <span className={`relative z-10 ${currentTheme.accent}`}>
                                 {downloadComplete ? <Check size={20} /> : isDownloading ? <Loader2 size={20} className="animate-spin" /> : <Download size={20} />}
                             </span>
                             {/* White icon layer (revealed by liquid) */}
@@ -309,7 +309,7 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
                                 />
                             )}
                         </div>
-                        {/* Icon layer - uses theme color */}
+                        {/* Icon layer - theme aware */}
                         <span className={`relative z-10 ${currentTheme.accent}`}>
                             {downloadComplete ? <Check size={18} /> : isDownloading ? <Loader2 size={18} className="animate-spin" /> : <Download size={18} />}
                         </span>
