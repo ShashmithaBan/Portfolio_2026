@@ -179,7 +179,7 @@ export default function Hero() {
             <img 
               src="/character.png" 
               alt="Noah - Web Developer" 
-              className={`w-full h-full lg:w-lg lg:h-lg object-contain hover:scale-105 transition-all duration-500 ${isDark ? 'animate-character-float' : 'animate-character-float-light'}`}
+              className={`w-full h-full lg:w-lg lg:h-lg object-contain cursor-pointer ${isDark ? 'animate-character-float' : 'animate-character-float-light'}`}
             />
           </div>
         </div>

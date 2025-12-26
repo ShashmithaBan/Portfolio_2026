@@ -212,53 +212,45 @@ h2 {
 
 @keyframes characterFloat {
   0%, 100% {
-    transform: translateY(0px) rotateZ(-2deg) scale(1);
+    transform: translateY(0px) rotateZ(-1deg);
     filter: drop-shadow(0 0 12px rgba(251, 191, 36, 0.3));
   }
-  25% {
-    transform: translateY(-30px) rotateZ(1deg) scale(1.02);
-    filter: drop-shadow(0 0 18px rgba(251, 191, 36, 0.4));
-  }
   50% {
-    transform: translateY(-50px) rotateZ(-1deg) scale(1);
-    filter: drop-shadow(0 0 24px rgba(251, 191, 36, 0.5));
-  }
-  75% {
-    transform: translateY(-30px) rotateZ(2deg) scale(1.02);
-    filter: drop-shadow(0 0 18px rgba(251, 191, 36, 0.4));
+    transform: translateY(-20px) rotateZ(1deg);
+    filter: drop-shadow(0 0 20px rgba(251, 191, 36, 0.4));
   }
 }
 
 .animate-character-float {
-  animation: characterFloat 4s ease-in-out infinite;
+  animation: characterFloat 5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.animate-character-float:hover {
+  animation-play-state: paused;
+  transform: scale(1.05) translateY(-10px);
 }
 
 /* Character animation - floating with slight rotation and glow - LIGHT THEME */
 @keyframes characterFloatLight {
   0%, 100% {
-    transform: translateY(0px) rotateZ(-2deg) scale(1);
+    transform: translateY(0px) rotateZ(-1deg);
     filter: drop-shadow(0 0 12px rgba(100, 116, 139, 0.15));
   }
-  25% {
-    transform: translateY(-30px) rotateZ(1deg) scale(1.02);
-    filter: drop-shadow(0 0 18px rgba(100, 116, 139, 0.2));
-  }
   50% {
-    transform: translateY(-50px) rotateZ(-1deg) scale(1);
-    filter: drop-shadow(0 0 24px rgba(100, 116, 139, 0.25));
-  }
-  75% {
-    transform: translateY(-30px) rotateZ(2deg) scale(1.02);
-    filter: drop-shadow(0 0 18px rgba(100, 116, 139, 0.2));
+    transform: translateY(-20px) rotateZ(1deg);
+    filter: drop-shadow(0 0 20px rgba(100, 116, 139, 0.2));
   }
 }
 
 .animate-character-float-light {
-  animation: characterFloatLight 4s ease-in-out infinite;
+  animation: characterFloatLight 5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.animate-character-float {
-  animation: characterFloat 4s ease-in-out infinite;
+.animate-character-float-light:hover {
+  animation-play-state: paused;
+  transform: scale(1.05) translateY(-10px);
 }
 
 /* Subtle pulse animation for skill level badges */
