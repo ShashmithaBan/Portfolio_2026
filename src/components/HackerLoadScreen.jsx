@@ -7,7 +7,7 @@ export default function HackerLoadScreen({ isVisible, onComplete }) {
   const [isLoading, setIsLoading] = useState(true);
 
   const codeSnippets = [
-    'git clone https://github.com/user/portfolio.git',
+    'git clone https://github.com/ShashmithaBan/Portfolio_2026.git',
     'cd portfolio && npm install',
     '$ npm run dev',
     'Compiling assets...',
