@@ -19,7 +19,7 @@ export default function HackerLoadScreen({ isVisible, onComplete }) {
     '✓ Services healthy',
     'Loading portfolio...',
     '> npm start',
-    'Server running on http://localhost:5173',
+    'Server running on https://shashmitha-devops.vercel.app/',
     'Ready to impress 🚀',
   ];
 
