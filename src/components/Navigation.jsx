@@ -47,6 +47,21 @@ const getDownloadTextClasses = (isDownloading, currentTheme) => {
     return `${currentTheme.text} group-hover:text-white`;
 };
 
+// Helper function to get theme toggle title
+const getThemeToggleTitle = (isDark) => {
+    return isDark ? 'Switch to Light Theme' : 'Switch to Dark Theme';
+};
+
+// Helper function to get header background class
+const getHeaderBgClass = (isDark) => {
+    return isDark ? 'bg-black/30' : 'bg-white/80';
+};
+
+// Helper function to get logo dot color class
+const getLogoDotClass = (isDark) => {
+    return isDark ? 'text-yellow-600' : 'text-[#64748b]';
+};
+
 // Helper function to get desktop download button classes
 const getDesktopDownloadButtonClasses = (isDownloading, currentTheme) => {
     const baseClasses = `group relative flex items-center gap-2 px-4 py-2 border rounded-full backdrop-blur-sm transition-all duration-300 text-sm tracking-wide whitespace-nowrap transform font-sans overflow-hidden ${currentTheme.border} shadow-lg ${currentTheme.shadowLighter} ${currentTheme.shadow}`;
@@ -175,7 +190,7 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
                     {/* Logo */}
                     <Link to="/" className={`text-xl md:text-2xl font-bold min-w-fit z-10 hover:opacity-80 transition-opacity`}>
                         <span className={`${currentTheme.text}`} style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, letterSpacing: '-0.5px' }}>Shashmitha</span>
-                        <span className={isDark ? 'text-yellow-600' : 'text-[#64748b]'}> .</span>
+                        <span className={getLogoDotClass(isDark)}> .</span>
                     </Link>
 
                     {/* Desktop Navigation - Centered Pill Container */}
@@ -203,7 +218,7 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
                         <button 
                             onClick={toggleTheme}
                             className={`p-2 rounded-full border transition-all duration-300 hover:scale-110 ${currentTheme.border} ${currentTheme.accent} ${currentTheme.bgCardHover} ${currentTheme.cardBorderHover} ${currentTheme.shadowLight}`}
-                            title={isDark ? 'Switch to Light Theme' : 'Switch to Dark Theme'}
+                            title={getThemeToggleTitle(isDark)}
                         >
                             {isDark ? <Sun size={20} /> : <Moon size={20} />}
                         </button>
@@ -256,12 +271,12 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
             </header>
 
             {/* Tablet Navigation - Shows on iPad/tablet screens (768px - 1279px) */}
-            <header className={`hidden md:flex xl:hidden fixed top-0 left-0 right-0 z-50 backdrop-blur-md ${isDark ? 'bg-black/30' : 'bg-white/80'}`}>
+            <header className={`hidden md:flex xl:hidden fixed top-0 left-0 right-0 z-50 backdrop-blur-md ${getHeaderBgClass(isDark)}`}>
                 <div className="w-full px-6 py-4 flex justify-between items-center">
                     {/* Logo */}
                     <Link to="/" className="text-xl font-bold hover:opacity-80 transition-opacity">
                         <span className={`${currentTheme.text}`} style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, letterSpacing: '-0.5px' }}>Shashmitha</span>
-                        <span className={isDark ? 'text-yellow-600' : 'text-[#64748b]'}> .</span>
+                        <span className={getLogoDotClass(isDark)}> .</span>
                     </Link>
 
                     {/* Tablet Navigation - Centered */}
@@ -289,7 +304,7 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
                         <button 
                             onClick={toggleTheme}
                             className={`p-2 rounded-full border transition-all duration-300 hover:scale-110 ${currentTheme.border} ${currentTheme.accent} ${currentTheme.bgCardHover}`}
-                            title={isDark ? 'Switch to Light Theme' : 'Switch to Dark Theme'}
+                            title={getThemeToggleTitle(isDark)}
                         >
                             {isDark ? <Sun size={20} /> : <Moon size={20} />}
                         </button>
@@ -341,11 +356,11 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
             </header>
 
             {/* Mobile Top Bar - Theme & Resume buttons (below 768px) */}
-            <div className={`md:hidden fixed top-0 left-0 right-0 z-50 px-4 py-3 flex justify-between items-center backdrop-blur-md ${isDark ? 'bg-black/30' : 'bg-white/80'}`}>
+            <div className={`md:hidden fixed top-0 left-0 right-0 z-50 px-4 py-3 flex justify-between items-center backdrop-blur-md ${getHeaderBgClass(isDark)}`}>
                 {/* Logo */}
                 <Link to="/" className="text-lg font-bold">
                     <span className={`${currentTheme.text}`} style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, letterSpacing: '-0.5px' }}>Shashmitha</span>
-                    <span className={isDark ? 'text-yellow-600' : 'text-[#64748b]'}> .</span>
+                    <span className={getLogoDotClass(isDark)}> .</span>
                 </Link>
                 
                 {/* Theme Toggle & Resume Download */}
@@ -353,7 +368,7 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
                     <button 
                         onClick={toggleTheme}
                         className={`p-2 rounded-full border transition-all duration-300 ${currentTheme.border} ${currentTheme.accent} ${currentTheme.bgCardHover}`}
-                        title={isDark ? 'Switch to Light Theme' : 'Switch to Dark Theme'}
+                        title={getThemeToggleTitle(isDark)}
                     >
                         {isDark ? <Sun size={18} /> : <Moon size={18} />}
                     </button>
