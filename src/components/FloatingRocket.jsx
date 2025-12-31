@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 
 // Spiral Rocket Component
 function SpiralRocket() {
@@ -148,6 +149,10 @@ function RocketSVG({ id }) {
     </svg>
   );
 }
+
+RocketSVG.propTypes = {
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
+};
 
 export default function FloatingRocket() {
   const spiral = SpiralRocket();

@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import PropTypes from 'prop-types';
 import { ThemeContext } from '../context/ThemeContext';
 
 export default function HackerLoadScreen({ isVisible, onComplete }) {
@@ -125,3 +126,8 @@ export default function HackerLoadScreen({ isVisible, onComplete }) {
     </div>
   );
 }
+
+HackerLoadScreen.propTypes = {
+  isVisible: PropTypes.bool.isRequired,
+  onComplete: PropTypes.func.isRequired
+};

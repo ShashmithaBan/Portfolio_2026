@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
-import { Mail, Github, Linkedin, Instagram, ChevronDown, BookOpen } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Mail, Github, Linkedin, Instagram, BookOpen } from 'lucide-react';
 import { ThemeContext } from '../context/ThemeContext';
 import ExperienceSlider from './ExperienceSlider';
 import AnimatedTitle from './AnimatedTitle';

@@ -12,7 +12,7 @@ export default function Experience() {
 
   // Generate random stars for background
   const stars = Array.from({ length: 50 }, (_, i) => ({
-    id: i,
+    id: `exp-star-${i}`,
     top: Math.random() * 100,
     left: Math.random() * 100,
     delay: Math.random() * 2,
@@ -149,12 +149,16 @@ export default function Experience() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {projects.map((project, index) => (
               <div
-                key={index}
+                key={project.title}
                 className="group animate-slideInLeft"
                 style={{ animationDelay: `${index * 0.15}s` }}
               >
-                <div className={`relative rounded-2xl overflow-hidden backdrop-blur-sm transition-all duration-300 h-full flex flex-col cursor-pointer ${currentTheme.bgCard} ${currentTheme.cardBorder} ${currentTheme.cardBorderHover}`}
+                <div 
+                  className={`relative rounded-2xl overflow-hidden backdrop-blur-sm transition-all duration-300 h-full flex flex-col cursor-pointer ${currentTheme.bgCard} ${currentTheme.cardBorder} ${currentTheme.cardBorderHover}`}
                   onClick={() => setExpandedProject(expandedProject === index ? null : index)}
+                  onKeyDown={(e) => e.key === 'Enter' && setExpandedProject(expandedProject === index ? null : index)}
+                  role="button"
+                  tabIndex={0}
                 >
                   {/* Project Image */}
                   <div className="relative h-48 overflow-hidden">
@@ -182,8 +186,8 @@ export default function Experience() {
 
                     {/* Tools Tags */}
                     <div className="flex flex-wrap gap-2 mb-4">
-                      {project.tools.map((tool, i) => (
-                        <span key={i} className={`px-3 py-1 rounded-full text-xs transition-colors ${currentTheme.badgeBg} ${currentTheme.badgeBorder} ${currentTheme.badgeText} ${currentTheme.bgCardHover}`}>
+                      {project.tools.map((tool) => (
+                        <span key={tool} className={`px-3 py-1 rounded-full text-xs transition-colors ${currentTheme.badgeBg} ${currentTheme.badgeBorder} ${currentTheme.badgeText} ${currentTheme.bgCardHover}`}>
                           {tool}
                         </span>
                       ))}
@@ -236,9 +240,9 @@ export default function Experience() {
               
               {/* Social Links */}
               <div className="flex gap-4">
-                {socialLinks.map((social, index) => (
+                {socialLinks.map((social) => (
                   <a 
-                    key={index}
+                    key={social.link}
                     href={social.link} 
                     target="_blank" 
                     rel="noopener noreferrer"

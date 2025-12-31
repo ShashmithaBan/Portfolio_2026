@@ -1,7 +1,8 @@
-import React, { useContext, useState, useRef, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { Home, User, Code, Briefcase, Mail, Moon, Sun, Download, Loader2, Check } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { ThemeContext } from '../context/ThemeContext';
+import PropTypes from 'prop-types';
 
 export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
     const location = useLocation();
@@ -11,7 +12,6 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
     const [isDownloading, setIsDownloading] = useState(false);
     const [downloadProgress, setDownloadProgress] = useState(0);
     const [downloadComplete, setDownloadComplete] = useState(false);
-    const downloadLinkRef = useRef(null);
 
     // Smooth easing function - easeInOutCubic
     const easeInOutCubic = (t) => {
@@ -47,7 +47,7 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
                 link.download = 'Shashmitha_Resume.pdf';
                 document.body.appendChild(link);
                 link.click();
-                document.body.removeChild(link);
+                link.remove();
                 
                 // Reset after showing completion
                 setTimeout(() => {
@@ -355,3 +355,8 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
         </>
     );
 }
+
+Navigation.propTypes = {
+    mobileMenuOpen: PropTypes.bool.isRequired,
+    setMobileMenuOpen: PropTypes.func.isRequired
+};

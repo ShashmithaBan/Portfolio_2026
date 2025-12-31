@@ -1,4 +1,5 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useMemo } from 'react';
+import PropTypes from 'prop-types';
 
 export const ThemeContext = createContext();
 
@@ -127,9 +128,21 @@ export const ThemeProvider = ({ children }) => {
     }
   };
 
+  const contextValue = useMemo(() => ({
+    isDark,
+    toggleTheme,
+    isTransitioning,
+    transitionDirection,
+    ...theme
+  }), [isDark, toggleTheme, isTransitioning, transitionDirection, theme]);
+
   return (
-    <ThemeContext.Provider value={{ isDark, toggleTheme, isTransitioning, transitionDirection, ...theme }}>
+    <ThemeContext.Provider value={contextValue}>
       {children}
     </ThemeContext.Provider>
   );
+};
+
+ThemeProvider.propTypes = {
+  children: PropTypes.node.isRequired
 };

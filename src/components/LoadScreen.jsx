@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import PropTypes from 'prop-types';
 import { ThemeContext } from '../context/ThemeContext';
 
 export default function LoadScreen({ onVisibilityChange }) {
@@ -30,7 +31,7 @@ export default function LoadScreen({ onVisibilityChange }) {
     const progressInterval = setInterval(() => {
       setProgress(prev => {
         const next = prev + Math.random() * 25;
-        return next > 100 ? 100 : next;
+        return Math.min(next, 100);
       });
     }, 250);
 
@@ -151,7 +152,7 @@ export default function LoadScreen({ onVisibilityChange }) {
           <div className="flex justify-center gap-2">
             {[0, 1, 2].map(i => (
               <div
-                key={i}
+                key={`dot-${i}`}
                 className={`w-2 h-2 rounded-full ${isDark ? 'bg-[#F58840]' : 'bg-[#64748b]'}`}
                 style={{
                   animation: 'pulse 1.4s infinite',
@@ -172,3 +173,7 @@ export default function LoadScreen({ onVisibilityChange }) {
     </div>
   );
 }
+
+LoadScreen.propTypes = {
+  onVisibilityChange: PropTypes.func
+};

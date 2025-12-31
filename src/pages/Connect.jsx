@@ -1,5 +1,5 @@
-import React, { useState, useContext, useRef, useEffect } from 'react';
-import { Mail, Github, Linkedin, Instagram, Send, CheckCircle, AlertCircle, Sparkles, X, PartyPopper, BookOpen } from 'lucide-react';
+import React, { useState, useContext, useRef } from 'react';
+import { Send, CheckCircle, AlertCircle, Sparkles, X, PartyPopper } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ThemeContext } from '../context/ThemeContext';
 import { socialLinks } from '../config/socialLinks';
@@ -21,14 +21,9 @@ export default function Connect() {
   // Security: Sanitize input to prevent XSS attacks (only for validation/submission, not live input)
   const sanitizeInput = (input) => {
     return input
-      .replace(/[<>]/g, '') // Remove < and > to prevent HTML injection
-      .replace(/javascript:/gi, '') // Remove javascript: protocol
-      .replace(/on\w+=/gi, ''); // Remove event handlers like onclick=
-  };
-
-  // Sanitize for final submission (includes trim)
-  const sanitizeForSubmission = (input) => {
-    return sanitizeInput(input).trim();
+      .replaceAll(/[<>]/g, '') // Remove < and > to prevent HTML injection
+      .replaceAll(/javascript:/gi, '') // Remove javascript: protocol
+      .replaceAll(/on\w+=/gi, ''); // Remove event handlers like onclick=
   };
 
   // Validation functions with friendly messages
@@ -77,9 +72,9 @@ export default function Connect() {
   const handleInputChange = (field, value) => {
     // Only remove dangerous characters, don't trim spaces while typing
     const cleanValue = value
-      .replace(/[<>]/g, '')
-      .replace(/javascript:/gi, '')
-      .replace(/on\w+=/gi, '');
+      .replaceAll(/[<>]/g, '')
+      .replaceAll(/javascript:/gi, '')
+      .replaceAll(/on\w+=/gi, '');
     
     setFormData(prev => ({ ...prev, [field]: cleanValue }));
     
@@ -87,9 +82,9 @@ export default function Connect() {
     if (touched[field]) {
       let error = '';
       switch (field) {
-        case 'name': error = validateName(sanitizedValue); break;
-        case 'email': error = validateEmail(sanitizedValue); break;
-        case 'message': error = validateMessage(sanitizedValue); break;
+        case 'name': error = validateName(cleanValue); break;
+        case 'email': error = validateEmail(cleanValue); break;
+        case 'message': error = validateMessage(cleanValue); break;
         default: break;
       }
       setErrors(prev => ({ ...prev, [field]: error }));
@@ -123,7 +118,7 @@ export default function Connect() {
 
   // Generate random stars for background
   const stars = Array.from({ length: 50 }, (_, i) => ({
-    id: i,
+    id: `connect-star-${i}`,
     top: Math.random() * 100,
     left: Math.random() * 100,
     delay: Math.random() * 2,
@@ -445,11 +440,11 @@ export default function Connect() {
               <h2 className={`text-2xl font-mono font-bold mb-8 ${currentTheme.textWhite}`}>Get In Touch</h2>
               
               <div className="space-y-4">
-                {socials.map((social, index) => {
+                {socials.map((social) => {
                   const IconComponent = social.icon;
                   return (
                     <a
-                      key={index}
+                      key={social.link}
                       href={social.link}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -490,9 +485,9 @@ export default function Connect() {
               
               {/* Social Links */}
               <div className="flex gap-4">
-                {socialLinks.map((social, index) => (
+                {socialLinks.map((social) => (
                   <a 
-                    key={index}
+                    key={social.link}
                     href={social.link} 
                     target="_blank" 
                     rel="noopener noreferrer"

@@ -76,9 +76,9 @@ function AppContent() {
           {/* Particles for night transition - orange accent */}
           {transitionDirection === 'toNight' && (
             <div className="animate-starsAppear">
-              {[...Array(15)].map((_, i) => (
+              {[...new Array(15)].map((_, i) => (
                 <div 
-                  key={i}
+                  key={`star-${i}`}
                   className="absolute w-1.5 h-1.5 bg-[#F58840] rounded-full animate-twinkle"
                   style={{
                     top: `${Math.random() * 60}%`,

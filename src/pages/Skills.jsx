@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ThemeContext } from '../context/ThemeContext';
@@ -7,8 +7,6 @@ import { socialLinks } from '../config/socialLinks';
 export default function Skills() {
   const { isDark, dark, light } = useContext(ThemeContext);
   const currentTheme = isDark ? dark : light;
-  
-  const [hoveredSkill, setHoveredSkill] = useState(null);
 
   // Level color configuration for both themes - Modern & Vibrant with animations
   const getLevelStyles = (level) => {
@@ -31,7 +29,7 @@ export default function Skills() {
 
   // Generate random stars for background
   const stars = Array.from({ length: 50 }, (_, i) => ({
-    id: i,
+    id: `skill-star-${i}`,
     top: Math.random() * 100,
     left: Math.random() * 100,
     delay: Math.random() * 2,
@@ -185,14 +183,12 @@ export default function Skills() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {skills.map((skill, index) => (
               <div
-                key={index}
+                key={skill.name}
                 className="group animate-rotateIn h-full"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div
                   className={`relative p-6 rounded-2xl backdrop-blur-md transition-all duration-300 h-full cursor-pointer border shadow-lg hover:shadow-xl ${currentTheme.bgCard} ${currentTheme.cardBorder} ${currentTheme.cardBorderHover} ${currentTheme.shadowLighter}`}
-                  onMouseEnter={() => setHoveredSkill(index)}
-                  onMouseLeave={() => setHoveredSkill(null)}
                 >
                   {/* Glow Effect on Hover */}
                   <div className={`absolute -inset-1 rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-300 ${skill.color} blur-2xl -z-10`}></div>
@@ -231,9 +227,9 @@ export default function Skills() {
               
               {/* Social Links */}
               <div className="flex gap-2 sm:gap-4">
-                {socialLinks.map((social, index) => (
+                {socialLinks.map((social) => (
                   <a 
-                    key={index}
+                    key={social.link}
                     href={social.link} 
                     target="_blank" 
                     rel="noopener noreferrer"

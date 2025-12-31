@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { Mail, Github, Linkedin, Instagram } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ThemeContext } from '../context/ThemeContext';
 import { socialLinks } from '../config/socialLinks';
@@ -7,16 +6,6 @@ import { socialLinks } from '../config/socialLinks';
 export default function About() {
   const { isDark, dark, light } = useContext(ThemeContext);
   const currentTheme = isDark ? dark : light;
-  const skills = [
-    { name: 'Terraform', icon: '/logo/terraform-hashicorp-logo-920x920-sue-v0-920x613.png', color: 'from-yellow-600 to-yellow-600' },
-    { name: 'Docker', icon: '/logo/images-Photoroom.png', color: 'from-blue-500 to-blue-900' },
-    { name: 'Kubernetes', icon: '/logo/Kubernetes-Logo.wine.png', color: 'from-green-500 to-green-900' },
-    { name: 'AWS', icon: '/logo/f48aadd7-3fa2-4218-bebf-597021659f2b-cover-Photoroom.png', color: 'from-yellow-500 to-orange-900' },
-    { name: 'GitHub', icon: '/logo/25231.png', color: 'from-gray-600 to-gray-900' },
-    { name: 'Linux', icon: '/logo/computer-illustration-linux-tux-as-logo-illustration-isolated-white-background-tux-penguin-character-258590115-Photoroom.png', color: 'from-orange-500 to-orange-900' },
-    { name: 'React', icon: '/logo/react-1.svg', color: 'from-cyan-400 to-cyan-900' },
-    { name: 'Spring Boot', icon: '/logo/spring-boot-logo-icon.webp', color: 'from-green-600 to-green-900' },
-  ];
 
   const achievements = [
     {
@@ -51,7 +40,7 @@ export default function About() {
       {/* Star Background */}
       <div className="fixed inset-0 pointer-events-none">
         {Array.from({ length: 50 }, (_, i) => ({
-          id: i,
+          id: `about-star-${i}`,
           top: Math.random() * 100,
           left: Math.random() * 100,
           delay: Math.random() * 2,
@@ -187,9 +176,9 @@ export default function About() {
               
               {/* Social Links */}
               <div className="flex gap-4">
-                {socialLinks.map((social, index) => (
+                {socialLinks.map((social) => (
                   <a 
-                    key={index}
+                    key={social.link}
                     href={social.link} 
                     target="_blank" 
                     rel="noopener noreferrer"
