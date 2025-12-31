@@ -91,19 +91,8 @@ const getCompactDownloadIcon = (downloadComplete, isDownloading, size) => {
     return <Download size={size} />;
 };
 
-// Helper function to get download button text
+// Helper function to get download button text (also used for title attribute)
 const getDownloadButtonText = (downloadComplete, isDownloading, downloadProgress) => {
-    if (downloadComplete) {
-        return 'Downloaded!';
-    }
-    if (isDownloading) {
-        return `${Math.round(downloadProgress)}%`;
-    }
-    return 'Download Resume';
-};
-
-// Helper function to get download button title
-const getDownloadButtonTitle = (downloadComplete, isDownloading, downloadProgress) => {
     if (downloadComplete) {
         return 'Downloaded!';
     }
@@ -309,7 +298,7 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
                             onClick={handleDownload}
                             disabled={isDownloading}
                             className={getCompactDownloadButtonClasses(isDownloading, currentTheme)}
-                            title={getDownloadButtonTitle(downloadComplete, isDownloading, downloadProgress)}
+                            title={getDownloadButtonText(downloadComplete, isDownloading, downloadProgress)}
                         >
                             {/* Green Liquid Fill Animation - Circular */}
                             <div 
@@ -373,7 +362,7 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
                         onClick={handleDownload}
                         disabled={isDownloading}
                         className={`relative p-2 rounded-full border transition-all duration-300 overflow-hidden ${currentTheme.border} ${currentTheme.bgCardHover}`}
-                        title={getDownloadButtonTitle(downloadComplete, isDownloading, downloadProgress)}
+                        title={getDownloadButtonText(downloadComplete, isDownloading, downloadProgress)}
                     >
                         {/* Green Liquid Fill Animation - Circular */}
                         <div 

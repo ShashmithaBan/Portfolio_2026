@@ -12,6 +12,30 @@ const getMessageLengthClass = (length, currentTheme) => {
   return currentTheme.textGrayMuted;
 };
 
+// Helper function to get input field classes
+const getInputClasses = (hasError, isTouched, currentTheme) => {
+  const baseClasses = `w-full px-4 py-3 rounded-lg placeholder-gray-400 focus:outline-none transition-colors ${currentTheme.inputBg} ${currentTheme.text} ${currentTheme.inputFocus}`;
+  const borderClass = hasError && isTouched ? 'border-red-500 border-2' : currentTheme.inputBorder;
+  return `${baseClasses} ${borderClass}`;
+};
+
+// Helper function to get textarea classes
+const getTextareaClasses = (hasError, isTouched, currentTheme) => {
+  const baseClasses = `w-full px-4 py-3 rounded-lg placeholder-gray-400 focus:outline-none transition-colors resize-none ${currentTheme.inputBg} ${currentTheme.text} ${currentTheme.inputFocus}`;
+  const borderClass = hasError && isTouched ? 'border-red-500 border-2' : currentTheme.inputBorder;
+  return `${baseClasses} ${borderClass}`;
+};
+
+// Helper function to get aria-invalid value
+const getAriaInvalid = (hasError, isTouched) => {
+  return hasError && isTouched ? 'true' : 'false';
+};
+
+// Helper function to get aria-describedby value
+const getAriaDescribedBy = (hasError, errorId) => {
+  return hasError ? errorId : undefined;
+};
+
 export default function Connect() {
   const { isDark, dark, light } = useContext(ThemeContext);
   const currentTheme = isDark ? dark : light;
@@ -282,10 +306,10 @@ export default function Connect() {
                     value={formData.name}
                     onChange={(e) => handleInputChange('name', e.target.value)}
                     onBlur={() => handleBlur('name')}
-                    className={`w-full px-4 py-3 rounded-lg placeholder-gray-400 focus:outline-none transition-colors ${currentTheme.inputBg} ${errors.name && touched.name ? 'border-red-500 border-2' : currentTheme.inputBorder} ${currentTheme.text} ${currentTheme.inputFocus}`}
+                    className={getInputClasses(errors.name, touched.name, currentTheme)}
                     placeholder="Your name"
-                    aria-invalid={errors.name && touched.name ? 'true' : 'false'}
-                    aria-describedby={errors.name ? 'name-error' : undefined}
+                    aria-invalid={getAriaInvalid(errors.name, touched.name)}
+                    aria-describedby={getAriaDescribedBy(errors.name, 'name-error')}
                   />
                   {errors.name && touched.name && (
                     <p id="name-error" className="mt-2 text-sm text-red-500 flex items-center gap-1">
@@ -307,10 +331,10 @@ export default function Connect() {
                     value={formData.email}
                     onChange={(e) => handleInputChange('email', e.target.value)}
                     onBlur={() => handleBlur('email')}
-                    className={`w-full px-4 py-3 rounded-lg placeholder-gray-400 focus:outline-none transition-colors ${currentTheme.inputBg} ${errors.email && touched.email ? 'border-red-500 border-2' : currentTheme.inputBorder} ${currentTheme.text} ${currentTheme.inputFocus}`}
+                    className={getInputClasses(errors.email, touched.email, currentTheme)}
                     placeholder="your@email.com"
-                    aria-invalid={errors.email && touched.email ? 'true' : 'false'}
-                    aria-describedby={errors.email ? 'email-error' : undefined}
+                    aria-invalid={getAriaInvalid(errors.email, touched.email)}
+                    aria-describedby={getAriaDescribedBy(errors.email, 'email-error')}
                   />
                   {errors.email && touched.email && (
                     <p id="email-error" className="mt-2 text-sm text-red-500 flex items-center gap-1">
@@ -331,10 +355,10 @@ export default function Connect() {
                     value={formData.message}
                     onChange={(e) => handleInputChange('message', e.target.value)}
                     onBlur={() => handleBlur('message')}
-                    className={`w-full px-4 py-3 rounded-lg placeholder-gray-400 focus:outline-none transition-colors resize-none ${currentTheme.inputBg} ${errors.message && touched.message ? 'border-red-500 border-2' : currentTheme.inputBorder} ${currentTheme.text} ${currentTheme.inputFocus}`}
+                    className={getTextareaClasses(errors.message, touched.message, currentTheme)}
                     placeholder="Your message here..."
-                    aria-invalid={errors.message && touched.message ? 'true' : 'false'}
-                    aria-describedby={errors.message ? 'message-error' : undefined}
+                    aria-invalid={getAriaInvalid(errors.message, touched.message)}
+                    aria-describedby={getAriaDescribedBy(errors.message, 'message-error')}
                   />
                   <div className="flex justify-between mt-2">
                     {errors.message && touched.message ? (
@@ -388,8 +412,7 @@ export default function Connect() {
                 <div 
                   className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-fadeIn"
                   onClick={() => setShowSuccessModal(false)}
-                  onKeyDown={(e) => e.key === 'Escape' && setShowSuccessModal(false)}
-                  role="presentation"
+                  aria-hidden="true"
                 />
                 
                 {/* Modal */}
