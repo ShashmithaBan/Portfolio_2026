@@ -5,6 +5,13 @@ import { ThemeContext } from '../context/ThemeContext';
 import { socialLinks } from '../config/socialLinks';
 import emailjs from '@emailjs/browser';
 
+// Helper function to get message length indicator class
+const getMessageLengthClass = (length, currentTheme) => {
+  if (length >= 1000) return 'text-red-500';
+  if (length > 900) return 'text-yellow-500';
+  return currentTheme.textGrayMuted;
+};
+
 export default function Connect() {
   const { isDark, dark, light } = useContext(ThemeContext);
   const currentTheme = isDark ? dark : light;
@@ -264,9 +271,10 @@ export default function Connect() {
                 />
 
                 <div>
-                  <label className={`block font-mono font-semibold mb-3 ${currentTheme.textWhite}`}>Full Name <span className="text-red-500">*</span></label>
+                  <label htmlFor="user_name" className={`block font-mono font-semibold mb-3 ${currentTheme.textWhite}`}>Full Name <span className="text-red-500">*</span></label>
                   <input
                     type="text"
+                    id="user_name"
                     name="user_name"
                     required
                     maxLength={50}
@@ -288,9 +296,10 @@ export default function Connect() {
                 </div>
 
                 <div>
-                  <label className={`block font-mono font-semibold mb-3 ${currentTheme.textWhite}`}>Email Address <span className="text-red-500">*</span></label>
+                  <label htmlFor="user_email" className={`block font-mono font-semibold mb-3 ${currentTheme.textWhite}`}>Email Address <span className="text-red-500">*</span></label>
                   <input
                     type="email"
+                    id="user_email"
                     name="user_email"
                     required
                     maxLength={100}
@@ -312,8 +321,9 @@ export default function Connect() {
                 </div>
 
                 <div>
-                  <label className={`block font-mono font-semibold mb-3 ${currentTheme.textWhite}`}>Message <span className="text-red-500">*</span></label>
+                  <label htmlFor="message" className={`block font-mono font-semibold mb-3 ${currentTheme.textWhite}`}>Message <span className="text-red-500">*</span></label>
                   <textarea
+                    id="message"
                     name="message"
                     required
                     rows={5}
@@ -333,7 +343,7 @@ export default function Connect() {
                         {errors.message}
                       </p>
                     ) : <span />}
-                    <span className={`text-xs ${formData.message.length > 900 ? 'text-yellow-500' : formData.message.length >= 1000 ? 'text-red-500' : currentTheme.textGrayMuted}`}>
+                    <span className={`text-xs ${getMessageLengthClass(formData.message.length, currentTheme)}`}>
                       {formData.message.length}/1000
                     </span>
                   </div>
@@ -368,14 +378,24 @@ export default function Connect() {
 
             {/* Success Modal Overlay */}
             {showSuccessModal && (
-              <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={() => setShowSuccessModal(false)}>
+              <div 
+                className="fixed inset-0 z-50 flex items-center justify-center p-4" 
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="success-modal-title"
+              >
                 {/* Backdrop */}
-                <div className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-fadeIn" />
+                <button 
+                  type="button"
+                  className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-fadeIn cursor-default border-0"
+                  onClick={() => setShowSuccessModal(false)}
+                  onKeyDown={(e) => e.key === 'Escape' && setShowSuccessModal(false)}
+                  aria-label="Close modal"
+                />
                 
                 {/* Modal */}
                 <div 
                   className="relative bg-gradient-to-br from-emerald-900/90 via-green-800/90 to-teal-900/90 backdrop-blur-xl rounded-3xl p-8 max-w-md w-full shadow-2xl border border-emerald-500/30 animate-successPop"
-                  onClick={(e) => e.stopPropagation()}
                 >
                   {/* Close button */}
                   <button 
@@ -413,7 +433,7 @@ export default function Connect() {
                   
                   {/* Message */}
                   <div className="text-center">
-                    <h3 className="text-2xl font-bold text-white mb-2 flex items-center justify-center gap-2">
+                    <h3 id="success-modal-title" className="text-2xl font-bold text-white mb-2 flex items-center justify-center gap-2">
                       <PartyPopper className="text-yellow-400" size={24} />
                       Message Sent!
                       <PartyPopper className="text-yellow-400 transform scale-x-[-1]" size={24} />
@@ -440,7 +460,7 @@ export default function Connect() {
               <h2 className={`text-2xl font-mono font-bold mb-8 ${currentTheme.textWhite}`}>Get In Touch</h2>
               
               <div className="space-y-4">
-                {socials.map((social) => {
+                {socials.map((social, index) => {
                   const IconComponent = social.icon;
                   return (
                     <a

@@ -4,6 +4,49 @@ import { Link, useLocation } from 'react-router-dom';
 import { ThemeContext } from '../context/ThemeContext';
 import PropTypes from 'prop-types';
 
+// Helper function to check if nav item is active
+const isNavItemActive = (itemPath, currentPath) => {
+    return itemPath === '/' ? currentPath === 'home' : currentPath === itemPath.substring(1);
+};
+
+// Helper function to get nav link classes for desktop
+const getDesktopNavLinkClasses = (isActive, currentTheme, isDark) => {
+    const baseClasses = 'px-4 md:px-6 py-2 rounded-full text-xs md:text-sm font-mono font-medium transition-all duration-300 tracking-wide whitespace-nowrap transform hover:scale-110';
+    if (isActive) {
+        const textColor = isDark ? 'text-black' : 'text-white';
+        return `${baseClasses} bg-gradient-to-r ${currentTheme.gradient} ${textColor} shadow-lg ${currentTheme.shadow} ${currentTheme.borderLight}`;
+    }
+    return `${baseClasses} ${currentTheme.textGray} ${currentTheme.accentHover} ${currentTheme.bgCardHover} border border-transparent`;
+};
+
+// Helper function to get tablet nav link classes
+const getTabletNavLinkClasses = (isActive, currentTheme, isDark) => {
+    const baseClasses = 'flex items-center gap-1.5 px-3 py-2 rounded-full text-xs font-mono font-medium transition-all duration-300 whitespace-nowrap';
+    if (isActive) {
+        const textColor = isDark ? 'text-black' : 'text-white';
+        return `${baseClasses} bg-gradient-to-r ${currentTheme.gradient} ${textColor} shadow-lg ${currentTheme.shadow}`;
+    }
+    return `${baseClasses} ${currentTheme.textGray} ${currentTheme.accentHover} ${currentTheme.bgCardHover}`;
+};
+
+// Helper function to get mobile nav link classes
+const getMobileNavLinkClasses = (isActive, currentTheme, isDark) => {
+    const baseClasses = 'flex items-center justify-center transition-all duration-300 rounded-full';
+    if (isActive) {
+        const textColor = isDark ? 'text-black' : 'text-white';
+        return `${baseClasses} px-4 py-2 bg-gradient-to-r ${currentTheme.gradient} ${textColor} font-light shadow-lg ${currentTheme.shadow}`;
+    }
+    return `${baseClasses} w-9 h-9 ${currentTheme.textGray} ${currentTheme.accentHover}`;
+};
+
+// Helper function to get download button text classes
+const getDownloadTextClasses = (isDownloading, currentTheme) => {
+    if (isDownloading) {
+        return 'text-black';
+    }
+    return `${currentTheme.text} group-hover:text-white`;
+};
+
 export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
     const location = useLocation();
     const currentPath = location.pathname === '/' ? 'home' : location.pathname.substring(1);
@@ -84,19 +127,18 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
                     <nav className="flex justify-center absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
                         {/* Main Navigation Wrapper - The pill background */}
                         <div className={`flex items-center gap-2 md:gap-3 px-4 md:px-5 py-2 md:py-2 rounded-full backdrop-blur-sm ${currentTheme.bgCard} ${currentTheme.cardBorder}`}>
-                            {navItems.map((item) => (
-                                <Link
-                                    key={item.path}
-                                    to={item.path}
-                                    className={`px-4 md:px-6 py-2 rounded-full text-xs md:text-sm font-mono font-medium transition-all duration-300 tracking-wide whitespace-nowrap transform hover:scale-110
-                  ${(item.path === '/' ? currentPath === 'home' : currentPath === item.path.substring(1))
-                                        ? `bg-gradient-to-r ${currentTheme.gradient} ${isDark ? 'text-black' : 'text-white'} shadow-lg ${currentTheme.shadow} ${currentTheme.borderLight}`
-                                        : `${currentTheme.textGray} ${currentTheme.accentHover} ${currentTheme.bgCardHover} border border-transparent`
-                                    }`}
-                                >
-                                    {item.name}
-                                </Link>
-                            ))}
+                            {navItems.map((item) => {
+                                const isActive = isNavItemActive(item.path, currentPath);
+                                return (
+                                    <Link
+                                        key={item.path}
+                                        to={item.path}
+                                        className={getDesktopNavLinkClasses(isActive, currentTheme, isDark)}
+                                    >
+                                        {item.name}
+                                    </Link>
+                                );
+                            })}
                         </div>
                     </nav>
 
@@ -138,7 +180,7 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
                             </div>
                             
                             {/* Text layer (background) - theme aware, turns white on hover */}
-                            <span className={`relative z-10 flex items-center gap-2 font-medium transition-colors duration-300 ${isDownloading ? 'text-black' : `${currentTheme.text} group-hover:text-white`}`}>
+                            <span className={`relative z-10 flex items-center gap-2 font-medium transition-colors duration-300 ${getDownloadTextClasses(isDownloading, currentTheme)}`}>
                                 {downloadComplete ? (
                                     <Check className="w-4 h-4" />
                                 ) : isDownloading ? (
@@ -188,16 +230,12 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
                         <div className={`flex items-center gap-1 px-3 py-2 rounded-full backdrop-blur-sm ${currentTheme.bgCard} ${currentTheme.cardBorder}`}>
                             {navItems.map((item) => {
                                 const Icon = item.icon;
-                                const isActive = item.path === '/' ? currentPath === 'home' : currentPath === item.path.substring(1);
+                                const isActive = isNavItemActive(item.path, currentPath);
                                 return (
                                     <Link
                                         key={item.path}
                                         to={item.path}
-                                        className={`flex items-center gap-1.5 px-3 py-2 rounded-full text-xs font-mono font-medium transition-all duration-300 whitespace-nowrap
-                                            ${isActive
-                                                ? `bg-gradient-to-r ${currentTheme.gradient} ${isDark ? 'text-black' : 'text-white'} shadow-lg ${currentTheme.shadow}`
-                                                : `${currentTheme.textGray} ${currentTheme.accentHover} ${currentTheme.bgCardHover}`
-                                            }`}
+                                        className={getTabletNavLinkClasses(isActive, currentTheme, isDark)}
                                     >
                                         <Icon size={16} />
                                         <span>{item.name}</span>
@@ -332,17 +370,13 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
                 <div className={`flex items-center justify-center gap-1 px-3 py-2 rounded-full backdrop-blur-lg shadow-2xl ${currentTheme.bgSecondary} ${currentTheme.borderLight}`}>
                     {navItems.map((item) => {
                         const Icon = item.icon;
-                        const isActive = item.path === '/' ? currentPath === 'home' : currentPath === item.path.substring(1);
+                        const isActive = isNavItemActive(item.path, currentPath);
                         return (
                             <Link
                                 key={item.path}
                                 to={item.path}
                                 onClick={() => setMobileMenuOpen(false)}
-                                className={`flex items-center justify-center transition-all duration-300 rounded-full ${
-                                    isActive
-                                        ? `px-4 py-2 bg-gradient-to-r ${currentTheme.gradient} ${isDark ? 'text-black' : 'text-white'} font-light shadow-lg ${currentTheme.shadow}`
-                                        : `w-9 h-9 ${currentTheme.textGray} ${currentTheme.accentHover}`
-                                }`}
+                                className={getMobileNavLinkClasses(isActive, currentTheme, isDark)}
                                 title={item.name}
                             >
                                 <Icon size={isActive ? 18 : 20} />

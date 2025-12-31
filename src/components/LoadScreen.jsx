@@ -2,6 +2,31 @@ import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { ThemeContext } from '../context/ThemeContext';
 
+// Helper function to get stage styles based on state and theme
+const getStageStyles = (index, stageIndex, isDark) => {
+  if (index < stageIndex) {
+    return isDark 
+      ? 'bg-[#F58840]/40 border border-[#B85252] text-white shadow-lg shadow-[#B85252]/30'
+      : 'bg-[#64748b]/20 border border-[#64748b]/40 text-[#64748b] shadow-lg shadow-[#64748b]/20';
+  }
+  if (index === stageIndex) {
+    return isDark
+      ? 'bg-gradient-to-r from-[#F58840] to-[#B85252] border border-[#B85252] text-white shadow-lg shadow-[#B85252]/50 scale-105'
+      : 'bg-gradient-to-r from-[#64748b] to-[#64748b] border border-[#64748b]/60 text-white shadow-lg shadow-[#64748b]/40 scale-105';
+  }
+  return isDark
+    ? 'bg-slate-800/30 border border-slate-700/30 text-gray-500'
+    : 'bg-white/80 border border-[#64748b]/20 text-[#64748b]';
+};
+
+// Helper function to get connector styles
+const getConnectorStyles = (index, stageIndex, isDark) => {
+  if (index < stageIndex) {
+    return isDark ? 'bg-[#B85252]' : 'bg-[#64748b]';
+  }
+  return isDark ? 'bg-slate-700/30' : 'bg-[#64748b]/40';
+};
+
 export default function LoadScreen({ onVisibilityChange }) {
   const { isDark } = useContext(ThemeContext);
   const [isVisible, setIsVisible] = useState(true);
@@ -102,29 +127,13 @@ export default function LoadScreen({ onVisibilityChange }) {
           {/* DevOps Pipeline Stages */}
           <div className="mb-12 flex justify-between items-center gap-1 px-2">
             {stages.map((s, index) => (
-              <React.Fragment key={index}>
-                <div className={`flex-1 py-2 px-2 rounded-lg flex flex-col items-center justify-center text-xs font-mono transition-all duration-300 ${
-                  index < stageIndex
-                    ? isDark 
-                      ? 'bg-[#F58840]/40 border border-[#B85252] text-white shadow-lg shadow-[#B85252]/30'
-                      : 'bg-[#64748b]/20 border border-[#64748b]/40 text-[#64748b] shadow-lg shadow-[#64748b]/20'
-                    : index === stageIndex
-                    ? isDark
-                      ? 'bg-gradient-to-r from-[#F58840] to-[#B85252] border border-[#B85252] text-white shadow-lg shadow-[#B85252]/50 scale-105'
-                      : 'bg-gradient-to-r from-[#64748b] to-[#64748b] border border-[#64748b]/60 text-white shadow-lg shadow-[#64748b]/40 scale-105'
-                    : isDark
-                    ? 'bg-slate-800/30 border border-slate-700/30 text-gray-500'
-                    : 'bg-white/80 border border-[#64748b]/20 text-[#64748b]'
-                }`}>
+              <React.Fragment key={`stage-${s.title.replace(/\s+/g, '-').toLowerCase()}`}>
+                <div className={`flex-1 py-2 px-2 rounded-lg flex flex-col items-center justify-center text-xs font-mono transition-all duration-300 ${getStageStyles(index, stageIndex, isDark)}`}>
                   <span className="text-lg mb-1">{s.icon}</span>
                   <span className="font-semibold text-center leading-tight">{s.title}</span>
                 </div>
                 {index < stages.length - 1 && (
-                  <div className={`h-1 flex-1 transition-all duration-300 ${
-                    index < stageIndex 
-                      ? isDark ? 'bg-[#B85252]' : 'bg-[#64748b]'
-                      : isDark ? 'bg-slate-700/30' : 'bg-[#64748b]/40'
-                  }`}></div>
+                  <div className={`h-1 flex-1 transition-all duration-300 ${getConnectorStyles(index, stageIndex, isDark)}`}></div>
                 )}
               </React.Fragment>
             ))}

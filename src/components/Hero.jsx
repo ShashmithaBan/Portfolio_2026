@@ -54,7 +54,7 @@ export default function Hero() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
             </span>
-            Open to Hire
+            <span>Open to Hire</span>
           </div>
 
           {/* Main Title */}
@@ -138,12 +138,12 @@ export default function Hero() {
             </div>
 
             {/* Icon 2 - Docker */}
-            <div className={`orbit-icon absolute w-24 h-24 backdrop-blur-md rounded-xl flex items-center justify-center shadow-lg pointer-events-auto overflow-hidden ${isDark ? 'bg-blue-400/20 border border-blue-400/40 shadow-blue-400/20' : `${currentTheme.bgSecondary} ${currentTheme.cardBorder} ${currentTheme.shadowLighter}`}`}>
+            <div className={`orbit-icon absolute w-24 h-24 backdrop-blur-md rounded-xl flex items-center justify-center shadow-lg pointer-events-auto overflow-hidden ${isDark ? 'bg-blue-400/20 border border-blue-400/40 shadow-blue-400/20' : [currentTheme.bgSecondary, currentTheme.cardBorder, currentTheme.shadowLighter].join(' ')}`}>
               <img src="/logo/images-Photoroom.png" alt="Docker" className="w-16 h-16 object-contain" />
             </div>
 
             {/* Icon 3 - Kubernetes */}
-            <div className={`orbit-icon absolute w-24 h-24 backdrop-blur-md rounded-xl flex items-center justify-center shadow-lg pointer-events-auto overflow-hidden ${isDark ? 'bg-green-400/20 border border-green-400/40 shadow-green-400/20' : `${currentTheme.bgSecondary} ${currentTheme.cardBorder} ${currentTheme.shadowLighter}`}`}>
+            <div className={`orbit-icon absolute w-24 h-24 backdrop-blur-md rounded-xl flex items-center justify-center shadow-lg pointer-events-auto overflow-hidden ${isDark ? 'bg-green-400/20 border border-green-400/40 shadow-green-400/20' : [currentTheme.bgSecondary, currentTheme.cardBorder, currentTheme.shadowLighter].join(' ')}`}>
               <img src="/logo/Kubernetes-Logo.wine.png" alt="Kubernetes" className="w-52 h-52 object-contain" />
             </div>
 
@@ -153,22 +153,22 @@ export default function Hero() {
             </div>
 
             {/* Icon 5 - GitHub */}
-            <div className={`orbit-icon absolute w-24 h-24 backdrop-blur-md rounded-xl flex items-center justify-center shadow-lg pointer-events-auto overflow-hidden ${isDark ? 'bg-gray-200/20 border border-gray-400/40 shadow-gray-400/20' : `${currentTheme.bgSecondary} ${currentTheme.cardBorder} ${currentTheme.shadowLighter}`}`}>
+            <div className={`orbit-icon absolute w-24 h-24 backdrop-blur-md rounded-xl flex items-center justify-center shadow-lg pointer-events-auto overflow-hidden ${isDark ? 'bg-gray-200/20 border border-gray-400/40 shadow-gray-400/20' : [currentTheme.bgSecondary, currentTheme.cardBorder, currentTheme.shadowLighter].join(' ')}`}>
               <img src="/logo/25231.png" alt="GitHub" className="w-16 h-16 object-contain" />
             </div>
 
             {/* Icon 6 - Linux */}
-            <div className={`orbit-icon absolute w-24 h-24 backdrop-blur-md rounded-xl flex items-center justify-center shadow-lg pointer-events-auto overflow-hidden ${isDark ? 'bg-orange-400/20 border border-orange-400/40 shadow-orange-400/20' : `${currentTheme.bgSecondary} ${currentTheme.cardBorder} ${currentTheme.shadowLighter}`}`}>
+            <div className={`orbit-icon absolute w-24 h-24 backdrop-blur-md rounded-xl flex items-center justify-center shadow-lg pointer-events-auto overflow-hidden ${isDark ? 'bg-orange-400/20 border border-orange-400/40 shadow-orange-400/20' : [currentTheme.bgSecondary, currentTheme.cardBorder, currentTheme.shadowLighter].join(' ')}`}>
               <img src="/logo/computer-illustration-linux-tux-as-logo-illustration-isolated-white-background-tux-penguin-character-258590115-Photoroom.png" alt="Linux" className="w-16 h-16 object-contain" />
             </div>
 
             {/* Icon 7 - React */}
-            <div className={`orbit-icon absolute w-24 h-24 backdrop-blur-md rounded-xl flex items-center justify-center shadow-lg pointer-events-auto overflow-hidden ${isDark ? 'bg-cyan-400/20 border border-cyan-400/40 shadow-cyan-400/20' : `${currentTheme.bgSecondary} ${currentTheme.cardBorder} ${currentTheme.shadowLighter}`}`}>
+            <div className={`orbit-icon absolute w-24 h-24 backdrop-blur-md rounded-xl flex items-center justify-center shadow-lg pointer-events-auto overflow-hidden ${isDark ? 'bg-cyan-400/20 border border-cyan-400/40 shadow-cyan-400/20' : [currentTheme.bgSecondary, currentTheme.cardBorder, currentTheme.shadowLighter].join(' ')}`}>
               <img src="/logo/react-1.svg" alt="React" className="w-16 h-16 object-contain" />
             </div>
 
             {/* Icon 8 - Spring Boot */}
-            <div className={`orbit-icon absolute w-24 h-24 backdrop-blur-md rounded-xl flex items-center justify-center shadow-lg pointer-events-auto overflow-hidden ${isDark ? 'bg-green-500/20 border border-green-500/40 shadow-green-500/20' : `${currentTheme.bgSecondary} ${currentTheme.cardBorder} ${currentTheme.shadowLighter}`}`}>
+            <div className={`orbit-icon absolute w-24 h-24 backdrop-blur-md rounded-xl flex items-center justify-center shadow-lg pointer-events-auto overflow-hidden ${isDark ? 'bg-green-500/20 border border-green-500/40 shadow-green-500/20' : [currentTheme.bgSecondary, currentTheme.cardBorder, currentTheme.shadowLighter].join(' ')}`}>
               <img src="/logo/spring-boot-logo-icon.webp" alt="Spring Boot" className="w-16 h-16 object-contain" />
             </div>
           </div>

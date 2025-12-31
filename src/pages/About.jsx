@@ -145,7 +145,7 @@ export default function About() {
           <div className="space-y-6">
             {achievements.map((achievement, index) => (
               <div
-                key={index}
+                key={`achievement-${achievement.title.replace(/\s+/g, '-').toLowerCase()}`}
                 className={`p-6 backdrop-blur-sm rounded-2xl transition-all duration-500 hover:-translate-y-1 hover:scale-[1.02] animate-slideInLeft ${currentTheme.bgCard} ${currentTheme.cardBorder} ${currentTheme.cardBorderHover} ${currentTheme.bgCardHover}`}
                 style={{ animationDelay: `${0.5 + index * 0.1}s` }}
               >

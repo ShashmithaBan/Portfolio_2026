@@ -2,10 +2,17 @@ import React, { useState, useEffect, useContext } from 'react';
 import { ChevronUp, ChevronDown } from 'lucide-react';
 import { ThemeContext } from '../context/ThemeContext';
 
+// Helper function to get indicator button styles
+const getIndicatorStyles = (index, currentIndex, isDark) => {
+  if (index === currentIndex) {
+    return isDark ? 'bg-[#F58840] w-6 sm:w-8' : 'bg-[#64748b] w-6 sm:w-8';
+  }
+  return isDark ? 'bg-gray-600 hover:bg-gray-500' : 'bg-[#64748b]/40 hover:bg-[#64748b]/60';
+};
+
 export default function ExperienceSlider() {
   const { isDark } = useContext(ThemeContext);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [direction, setDirection] = useState('up');
   const [autoPlay, setAutoPlay] = useState(true);
 
   const experiences = [
@@ -43,7 +50,6 @@ export default function ExperienceSlider() {
     if (!autoPlay) return;
 
     const interval = setInterval(() => {
-      setDirection('up');
       setCurrentIndex((prev) => (prev + 1) % experiences.length);
     }, 5000);
 
@@ -52,14 +58,12 @@ export default function ExperienceSlider() {
 
   const handleNext = () => {
     setAutoPlay(false);
-    setDirection('up');
     setCurrentIndex((prev) => (prev + 1) % experiences.length);
     setAutoPlay(true);
   };
 
   const handlePrev = () => {
     setAutoPlay(false);
-    setDirection('down');
     setCurrentIndex((prev) => (prev - 1 + experiences.length) % experiences.length);
     setAutoPlay(true);
   };
@@ -111,9 +115,9 @@ export default function ExperienceSlider() {
 
         {/* Tools/Skills */}
         <div className="flex flex-wrap gap-1.5 sm:gap-2">
-          {currentExperience.tools.slice(0, 4).map((tool, index) => (
+          {currentExperience.tools.slice(0, 4).map((tool) => (
             <span
-              key={index}
+              key={`tool-${tool}`}
               className={`px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-light ${
                 isDark
                   ? 'bg-[#F58840]/10 border border-[#F58840]/20 text-[#F58840]'
@@ -138,19 +142,15 @@ export default function ExperienceSlider() {
         <div className="flex items-center justify-between mt-2 sm:mt-0">
           {/* Indicators */}
           <div className="flex gap-1.5 sm:gap-2">
-            {experiences.map((_, index) => (
+            {experiences.map((exp, index) => (
               <button
-                key={index}
+                key={`exp-indicator-${exp.id}`}
                 onClick={() => {
                   setAutoPlay(false);
                   setCurrentIndex(index);
                   setAutoPlay(true);
                 }}
-                className={`w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full transition-all duration-300 ${
-                  index === currentIndex
-                    ? isDark ? 'bg-[#F58840] w-6 sm:w-8' : 'bg-[#64748b] w-6 sm:w-8'
-                    : isDark ? 'bg-gray-600 hover:bg-gray-500' : 'bg-[#64748b]/40 hover:bg-[#64748b]/60'
-                }`}
+                className={`w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full transition-all duration-300 ${getIndicatorStyles(index, currentIndex, isDark)}`}
               />
             ))}
           </div>

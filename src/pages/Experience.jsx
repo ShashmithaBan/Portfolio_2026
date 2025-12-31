@@ -153,12 +153,10 @@ export default function Experience() {
                 className="group animate-slideInLeft"
                 style={{ animationDelay: `${index * 0.15}s` }}
               >
-                <div 
-                  className={`relative rounded-2xl overflow-hidden backdrop-blur-sm transition-all duration-300 h-full flex flex-col cursor-pointer ${currentTheme.bgCard} ${currentTheme.cardBorder} ${currentTheme.cardBorderHover}`}
+                <button 
+                  type="button"
+                  className={`relative rounded-2xl overflow-hidden backdrop-blur-sm transition-all duration-300 h-full flex flex-col cursor-pointer text-left w-full ${currentTheme.bgCard} ${currentTheme.cardBorder} ${currentTheme.cardBorderHover}`}
                   onClick={() => setExpandedProject(expandedProject === index ? null : index)}
-                  onKeyDown={(e) => e.key === 'Enter' && setExpandedProject(expandedProject === index ? null : index)}
-                  role="button"
-                  tabIndex={0}
                 >
                   {/* Project Image */}
                   <div className="relative h-48 overflow-hidden">
@@ -226,7 +224,7 @@ export default function Experience() {
                       </div>
                     )}
                   </div>
-                </div>
+                </button>
               </div>
             ))}
           </div>
