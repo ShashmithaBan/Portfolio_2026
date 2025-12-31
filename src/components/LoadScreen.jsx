@@ -127,7 +127,7 @@ export default function LoadScreen({ onVisibilityChange }) {
           {/* DevOps Pipeline Stages */}
           <div className="mb-12 flex justify-between items-center gap-1 px-2">
             {stages.map((s, index) => (
-              <React.Fragment key={`stage-${s.title.replace(/\s+/g, '-').toLowerCase()}`}>
+              <React.Fragment key={`stage-${s.title.replaceAll(/\s+/g, '-').toLowerCase()}`}>
                 <div className={`flex-1 py-2 px-2 rounded-lg flex flex-col items-center justify-center text-xs font-mono transition-all duration-300 ${getStageStyles(index, stageIndex, isDark)}`}>
                   <span className="text-lg mb-1">{s.icon}</span>
                   <span className="font-semibold text-center leading-tight">{s.title}</span>

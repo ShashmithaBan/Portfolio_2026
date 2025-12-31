@@ -47,6 +47,72 @@ const getDownloadTextClasses = (isDownloading, currentTheme) => {
     return `${currentTheme.text} group-hover:text-white`;
 };
 
+// Helper function to get desktop download button classes
+const getDesktopDownloadButtonClasses = (isDownloading, currentTheme) => {
+    const baseClasses = `group relative flex items-center gap-2 px-4 py-2 border rounded-full backdrop-blur-sm transition-all duration-300 text-sm tracking-wide whitespace-nowrap transform font-sans overflow-hidden ${currentTheme.border} shadow-lg ${currentTheme.shadowLighter} ${currentTheme.shadow}`;
+    if (isDownloading) {
+        return baseClasses;
+    }
+    return `${baseClasses} ${currentTheme.buttonHover} hover:scale-110 hover:font-bold`;
+};
+
+// Helper function to get tablet/mobile download button classes
+const getCompactDownloadButtonClasses = (isDownloading, currentTheme) => {
+    const baseClasses = `relative p-2 rounded-full border transition-all duration-300 overflow-hidden ${currentTheme.border} ${currentTheme.bgCardHover}`;
+    if (isDownloading) {
+        return baseClasses;
+    }
+    return `${baseClasses} hover:scale-110`;
+};
+
+// Helper function to render download icon based on state
+const getDownloadIcon = (downloadComplete, isDownloading, size = 4) => {
+    if (downloadComplete) {
+        return <Check className={`w-${size} h-${size}`} />;
+    }
+    if (isDownloading) {
+        return <Loader2 className={`w-${size} h-${size} animate-spin`} />;
+    }
+    return (
+        <svg className={`w-${size} h-${size} transition-transform duration-300 hover:rotate-12`} fill="currentColor" viewBox="0 0 24 24">
+            <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" />
+        </svg>
+    );
+};
+
+// Helper function to render compact download icon (for tablet/mobile)
+const getCompactDownloadIcon = (downloadComplete, isDownloading, size) => {
+    if (downloadComplete) {
+        return <Check size={size} />;
+    }
+    if (isDownloading) {
+        return <Loader2 size={size} className="animate-spin" />;
+    }
+    return <Download size={size} />;
+};
+
+// Helper function to get download button text
+const getDownloadButtonText = (downloadComplete, isDownloading, downloadProgress) => {
+    if (downloadComplete) {
+        return 'Downloaded!';
+    }
+    if (isDownloading) {
+        return `${Math.round(downloadProgress)}%`;
+    }
+    return 'Download Resume';
+};
+
+// Helper function to get download button title
+const getDownloadButtonTitle = (downloadComplete, isDownloading, downloadProgress) => {
+    if (downloadComplete) {
+        return 'Downloaded!';
+    }
+    if (isDownloading) {
+        return `${Math.round(downloadProgress)}%`;
+    }
+    return 'Download Resume';
+};
+
 export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
     const location = useLocation();
     const currentPath = location.pathname === '/' ? 'home' : location.pathname.substring(1);
@@ -156,7 +222,7 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
                         <button 
                             onClick={handleDownload}
                             disabled={isDownloading}
-                            className={`group relative flex items-center gap-2 px-4 py-2 border rounded-full backdrop-blur-sm transition-all duration-300 text-sm tracking-wide whitespace-nowrap transform font-sans overflow-hidden ${currentTheme.border} ${!isDownloading ? currentTheme.buttonHover : ''} ${!isDownloading ? 'hover:scale-110' : ''} shadow-lg ${currentTheme.shadowLighter} ${currentTheme.shadow} ${!isDownloading ? 'hover:font-bold' : ''}`}
+                            className={getDesktopDownloadButtonClasses(isDownloading, currentTheme)}
                         >
                             {/* Green Liquid Fill Animation */}
                             <div 
@@ -181,16 +247,8 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
                             
                             {/* Text layer (background) - theme aware, turns white on hover */}
                             <span className={`relative z-10 flex items-center gap-2 font-medium transition-colors duration-300 ${getDownloadTextClasses(isDownloading, currentTheme)}`}>
-                                {downloadComplete ? (
-                                    <Check className="w-4 h-4" />
-                                ) : isDownloading ? (
-                                    <Loader2 className="w-4 h-4 animate-spin" />
-                                ) : (
-                                    <svg className="w-4 h-4 transition-transform duration-300 hover:rotate-12" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" />
-                                    </svg>
-                                )}
-                                <span>{downloadComplete ? 'Downloaded!' : isDownloading ? `${Math.round(downloadProgress)}%` : 'Download Resume'}</span>
+                                {getDownloadIcon(downloadComplete, isDownloading)}
+                                <span>{getDownloadButtonText(downloadComplete, isDownloading, downloadProgress)}</span>
                             </span>
                             
                             {/* White text layer (revealed by liquid) */}
@@ -200,16 +258,8 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
                                     clipPath: `inset(0 ${100 - downloadProgress}% 0 0)`
                                 }}
                             >
-                                {downloadComplete ? (
-                                    <Check className="w-4 h-4" />
-                                ) : isDownloading ? (
-                                    <Loader2 className="w-4 h-4 animate-spin" />
-                                ) : (
-                                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" />
-                                    </svg>
-                                )}
-                                <span>{downloadComplete ? 'Downloaded!' : isDownloading ? `${Math.round(downloadProgress)}%` : 'Download Resume'}</span>
+                                {getDownloadIcon(downloadComplete, isDownloading)}
+                                <span>{getDownloadButtonText(downloadComplete, isDownloading, downloadProgress)}</span>
                             </span>
                         </button>
                     </div>
@@ -258,8 +308,8 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
                         <button 
                             onClick={handleDownload}
                             disabled={isDownloading}
-                            className={`relative p-2 rounded-full border transition-all duration-300 overflow-hidden ${!isDownloading ? 'hover:scale-110' : ''} ${currentTheme.border} ${currentTheme.bgCardHover}`}
-                            title={downloadComplete ? 'Downloaded!' : isDownloading ? `${Math.round(downloadProgress)}%` : 'Download Resume'}
+                            className={getCompactDownloadButtonClasses(isDownloading, currentTheme)}
+                            title={getDownloadButtonTitle(downloadComplete, isDownloading, downloadProgress)}
                         >
                             {/* Green Liquid Fill Animation - Circular */}
                             <div 
@@ -285,7 +335,7 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
                             </div>
                             {/* Icon layer - theme aware */}
                             <span className={`relative z-10 ${currentTheme.accent}`}>
-                                {downloadComplete ? <Check size={20} /> : isDownloading ? <Loader2 size={20} className="animate-spin" /> : <Download size={20} />}
+                                {getCompactDownloadIcon(downloadComplete, isDownloading, 20)}
                             </span>
                             {/* White icon layer (revealed by liquid) */}
                             <span 
@@ -294,7 +344,7 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
                                     clipPath: `inset(${100 - downloadProgress}% 0 0 0)`
                                 }}
                             >
-                                {downloadComplete ? <Check size={20} /> : isDownloading ? <Loader2 size={20} className="animate-spin" /> : <Download size={20} />}
+                                {getCompactDownloadIcon(downloadComplete, isDownloading, 20)}
                             </span>
                         </button>
                     </div>
@@ -323,7 +373,7 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
                         onClick={handleDownload}
                         disabled={isDownloading}
                         className={`relative p-2 rounded-full border transition-all duration-300 overflow-hidden ${currentTheme.border} ${currentTheme.bgCardHover}`}
-                        title={downloadComplete ? 'Downloaded!' : isDownloading ? `${Math.round(downloadProgress)}%` : 'Download Resume'}
+                        title={getDownloadButtonTitle(downloadComplete, isDownloading, downloadProgress)}
                     >
                         {/* Green Liquid Fill Animation - Circular */}
                         <div 
@@ -349,7 +399,7 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
                         </div>
                         {/* Icon layer - theme aware */}
                         <span className={`relative z-10 ${currentTheme.accent}`}>
-                            {downloadComplete ? <Check size={18} /> : isDownloading ? <Loader2 size={18} className="animate-spin" /> : <Download size={18} />}
+                            {getCompactDownloadIcon(downloadComplete, isDownloading, 18)}
                         </span>
                         {/* White icon layer (revealed by liquid) */}
                         <span 
@@ -358,7 +408,7 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }) {
                                 clipPath: `inset(${100 - downloadProgress}% 0 0 0)`
                             }}
                         >
-                            {downloadComplete ? <Check size={18} /> : isDownloading ? <Loader2 size={18} className="animate-spin" /> : <Download size={18} />}
+                            {getCompactDownloadIcon(downloadComplete, isDownloading, 18)}
                         </span>
                     </button>
                 </div>

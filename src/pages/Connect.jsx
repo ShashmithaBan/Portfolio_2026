@@ -376,21 +376,20 @@ export default function Connect() {
               </form>
             </div>
 
-            {/* Success Modal Overlay */}
+            {/* Success Modal - Conditionally rendered with proper accessibility */}
             {showSuccessModal && (
               <div 
-                className="fixed inset-0 z-50 flex items-center justify-center p-4" 
-                role="dialog"
+                className="fixed inset-0 z-50 flex items-center justify-center p-4"
+                role="alertdialog"
                 aria-modal="true"
                 aria-labelledby="success-modal-title"
               >
                 {/* Backdrop */}
-                <button 
-                  type="button"
-                  className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-fadeIn cursor-default border-0"
+                <div 
+                  className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-fadeIn"
                   onClick={() => setShowSuccessModal(false)}
                   onKeyDown={(e) => e.key === 'Escape' && setShowSuccessModal(false)}
-                  aria-label="Close modal"
+                  role="presentation"
                 />
                 
                 {/* Modal */}
@@ -401,6 +400,7 @@ export default function Connect() {
                   <button 
                     onClick={() => setShowSuccessModal(false)}
                     className="absolute top-4 right-4 p-2 rounded-full hover:bg-white/10 transition-colors text-white/70 hover:text-white"
+                    aria-label="Close modal"
                   >
                     <X size={20} />
                   </button>
