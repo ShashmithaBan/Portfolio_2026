@@ -18,6 +18,15 @@ export default function ExperienceSlider() {
   const experiences = [
     {
       id: 1,
+      company: 'H2O.ai',
+      position: 'DevOps Intern',
+      years: '2026 - Present',
+      description: 'Contributed to H2O.ai\'s DevOps team supporting infrastructure automation, CI/CD pipeline optimization, and cloud deployment workflows. ',
+      logo: '/h2o-logo.svg',
+      tools: ['Docker', 'Kubernetes', 'CI/CD', 'AWS', 'Infrastructure as Code'],
+    },
+    {
+      id: 2,
       company: 'Ceyentra Technologies',
       position: 'Software Engineer Intern',
       years: '2024 - 2025',
@@ -26,7 +35,7 @@ export default function ExperienceSlider() {
       tools: ['React', 'Tailwind CSS', 'JavaScript', 'Figma'],
     },
     {
-      id: 2,
+      id: 3,
       company: 'IEEE Student Branch University of Kelaniya',
       position: 'Vice Chairperson',
       years: '2024 - 2025',
@@ -35,7 +44,7 @@ export default function ExperienceSlider() {
       tools: [],
     },
     {
-      id: 3,
+      id: 4,
       company: 'Rotaract Club of University of Kelaniya',
       position: 'Team Leader - Digital media ',
       years: '2023 - 2024',

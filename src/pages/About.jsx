@@ -86,7 +86,7 @@ export default function About() {
             </p>
 
             <p className="text-base lg:text-lg">
-              Skilled in <span className={`font-semibold ${currentTheme.accent}`}>AWS, Docker, Linux, Terraform and Kubernetes (K8s)</span>, with hands-on experience in building automated and scalable solutions.
+              Currently interning as a <span className={`font-semibold ${currentTheme.accent}`}>DevOps Engineer at H2O.ai</span>, where I contribute to infrastructure automation and cloud deployment workflows. Skilled in <span className={`font-semibold ${currentTheme.accent}`}>AWS, Docker, Linux, Terraform and Kubernetes (K8s)</span>, with hands-on experience in building automated and scalable solutions.
             </p>
 
             <p className="text-base lg:text-lg">

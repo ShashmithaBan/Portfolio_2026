@@ -49,12 +49,12 @@ export default function Hero() {
         {/* Left Content - Order 1 on mobile, Order 1 on desktop */}
         <div className="space-y-6 sm:space-y-8 order-1">
           {/* Internship Seeking Badge - Minimal */}
-          <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium border backdrop-blur-sm transition-all duration-500 hover:scale-105 hover:shadow-lg animate-float-subtle ${isDark ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/20 hover:shadow-emerald-500/20' : 'bg-emerald-50 border-emerald-300 text-emerald-600 hover:bg-emerald-100 hover:shadow-emerald-300/30'}`}>
+          <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium border backdrop-blur-sm transition-all duration-500 hover:scale-105 hover:shadow-lg animate-float-subtle ${isDark ? 'bg-cyan-500/10 border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/20 hover:shadow-cyan-500/20' : 'bg-cyan-50 border-cyan-300 text-cyan-600 hover:bg-cyan-100 hover:shadow-cyan-300/30'}`}>
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
             </span>
-            <span>Open to Hire</span>
+            <span>Works @ H2O.ai</span>
           </div>
 
           {/* Main Title */}
@@ -72,7 +72,7 @@ export default function Hero() {
               onClick={handleHireMe}
               className={`px-5 sm:px-8 py-2 sm:py-3 text-sm sm:text-base rounded-full font-mono font-semibold transition transform hover:scale-105 tracking-wide shadow-lg ${currentTheme.accentBg} ${currentTheme.bgButtonHover} ${isDark ? 'text-black' : 'text-white'} ${currentTheme.shadow}`}
             >
-              Hire me
+              Contact me
             </button>
             <a href={quickLinks.instagram} target="_blank" rel="noopener noreferrer">
               <button className={`p-2 sm:p-3 border rounded-full transition transform hover:scale-105 ${currentTheme.borderLight} ${currentTheme.cardBorderHover}`}>
