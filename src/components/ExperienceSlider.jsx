@@ -80,54 +80,54 @@ export default function ExperienceSlider() {
   const currentExperience = experiences[currentIndex];
 
   return (
-    <div className={`relative w-full sm:w-11/12 h-auto min-h-64 sm:h-72 backdrop-blur-md rounded-2xl sm:rounded-3xl p-4 sm:p-6 overflow-hidden group ${
+    <div className={`relative w-full h-auto min-h-48 sm:min-h-56 backdrop-blur-md rounded-xl sm:rounded-2xl p-5 sm:p-6 group ${
       isDark
         ? 'bg-[#B85252]/10 border border-[#B85252]/30'
         : 'bg-[#64748b]/10 border border-[#64748b]/30'
     }`}>
       {/* Background gradient */}
-      <div className={`absolute inset-0 rounded-2xl sm:rounded-3xl ${
+      <div className={`absolute inset-0 rounded-xl sm:rounded-2xl ${
         isDark
           ? 'bg-linear-to-br from-black/40 to-transparent'
           : 'bg-linear-to-br from-white/40 to-transparent'
       }`} />
 
       {/* Content wrapper with animation */}
-      <div className="relative h-full flex flex-col justify-between z-10 gap-3 sm:gap-4">
+      <div className="relative h-full flex flex-col justify-between z-10 gap-3 sm:gap-3.5">
         {/* Header with logo and company info */}
-        <div className="flex items-start gap-3 sm:gap-6">
+        <div className="flex items-start gap-2.5 sm:gap-4">
           {/* Company Logo */}
-          <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl flex items-center justify-center shrink-0 shadow-lg bg-white">
-            <img 
-              src={currentExperience.logo} 
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl flex items-center justify-center shrink-0 shadow-lg bg-white">
+            <img
+              src={currentExperience.logo}
               alt={currentExperience.company}
-              className="w-12 h-12 sm:w-16 sm:h-16 object-contain rounded-lg sm:rounded-xl"
+              className="w-10 h-10 sm:w-12 sm:h-12 object-contain rounded-md sm:rounded-lg"
             />
           </div>
 
           {/* Company and Position */}
           <div className="flex-1 min-w-0">
-            <h3 className={`text-base sm:text-2xl font-mono font-bold truncate ${isDark ? 'text-white' : 'text-[#64748b]'}`}>
+            <h3 className={`text-sm sm:text-lg font-mono font-bold truncate ${isDark ? 'text-white' : 'text-[#64748b]'}`}>
               {currentExperience.position}
             </h3>
-            <p className={`text-xs sm:text-sm font-medium truncate ${isDark ? 'text-[#F58840]' : 'text-[#64748b]'}`}>{currentExperience.company}</p>
-            <p className={`text-xs mt-0.5 sm:mt-1 ${isDark ? 'text-[#EADEDE]' : 'text-[#64748b]/70'}`}>{currentExperience.years}</p>
+            <p className={`text-[11px] sm:text-xs font-medium truncate ${isDark ? 'text-[#F58840]' : 'text-[#64748b]'}`}>{currentExperience.company}</p>
+            <p className={`text-[10px] sm:text-[11px] mt-0.5 ${isDark ? 'text-[#EADEDE]' : 'text-[#64748b]/70'}`}>{currentExperience.years}</p>
           </div>
         </div>
 
         {/* Description */}
         <div className="flex-1">
-          <p className={`text-xs sm:text-sm leading-relaxed font-light line-clamp-3 sm:line-clamp-none ${isDark ? 'text-gray-300' : 'text-[#64748b]'}`}>
+          <p className={`text-[11px] sm:text-xs leading-relaxed font-light line-clamp-2 sm:line-clamp-3 ${isDark ? 'text-gray-300' : 'text-[#64748b]'}`}>
             {currentExperience.description}
           </p>
         </div>
 
         {/* Tools/Skills */}
-        <div className="flex flex-wrap gap-1.5 sm:gap-2">
+        <div className="flex flex-wrap gap-1 sm:gap-1.5">
           {currentExperience.tools.slice(0, 4).map((tool) => (
             <span
               key={`tool-${tool}`}
-              className={`px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-light ${
+              className={`px-2 sm:px-2.5 py-0.5 rounded-full text-[9px] sm:text-[10px] font-light ${
                 isDark
                   ? 'bg-[#F58840]/10 border border-[#F58840]/20 text-[#F58840]'
                   : 'bg-[#64748b]/20 border border-[#64748b]/40 text-[#64748b]'
@@ -137,7 +137,7 @@ export default function ExperienceSlider() {
             </span>
           ))}
           {currentExperience.tools.length > 4 && (
-            <span className={`px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-light ${
+            <span className={`px-2 sm:px-2.5 py-0.5 rounded-full text-[9px] sm:text-[10px] font-light ${
               isDark
                 ? 'bg-[#F58840]/10 border border-[#F58840]/20 text-[#F58840]'
                 : 'bg-[#64748b]/20 border border-[#64748b]/40 text-[#64748b]'
@@ -193,7 +193,7 @@ export default function ExperienceSlider() {
       </div>
 
       {/* Slide counter */}
-      <div className={`absolute top-3 sm:top-6 right-4 sm:right-8 text-[10px] sm:text-xs font-light ${isDark ? 'text-gray-500' : 'text-[#64748b]/60'}`}>
+      <div className={`absolute top-4 sm:top-5 right-4 sm:right-6 text-[9px] sm:text-[10px] font-light ${isDark ? 'text-gray-500' : 'text-[#64748b]/60'}`}>
         {currentIndex + 1} / {experiences.length}
       </div>
     </div>

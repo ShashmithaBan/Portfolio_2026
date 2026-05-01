@@ -22,13 +22,12 @@ export const ThemeProvider = ({ children }) => {
     // Change theme at the peak of the animation
     setTimeout(() => {
       setIsDark(!isDark);
-    }, 400);
-    
-    // End transition after animation completes
+    }, 1000);
+
     setTimeout(() => {
       setIsTransitioning(false);
       setTransitionDirection(null);
-    }, 800);
+    }, 2000);
   };
 
   const theme = {
